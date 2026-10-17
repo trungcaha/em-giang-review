@@ -1,0 +1,22 @@
+[
+ {"group":"Sức khỏe, ngoại hình","req_name":"Dầu gội phủ bạc Nezha 400ml","keyword":"dầu gội phủ bạc nezha","must_contain":"phủ bạc","fallback_keyword":"dầu gội phủ bạc"},
+ {"group":"Xe cộ","req_name":"Xịt phủ kính nano chống bám nước","keyword":"xịt phủ kính nano chống bám nước","must_contain":"kính","fallback_keyword":"phủ nano kính xe"},
+ {"group":"Sửa nhà","req_name":"Keo bọt nở chống thấm","keyword":"keo bọt nở foam","must_contain":"bọt nở","fallback_keyword":"keo bọt nở"},
+ {"group":"Sức khỏe","req_name":"Đai chỉnh tư thế lưng","keyword":"đai chỉnh tư thế lưng","must_contain":"đai","fallback_keyword":"đai chống gù"},
+ {"group":"Xe cộ","req_name":"Kích bình kiêm bơm lốp 5in1","keyword":"kích bình bơm lốp ô tô","must_contain":"kích bình","fallback_keyword":"kích bình ô tô"},
+ {"group":"Giải trí","req_name":"Loa karaoke xách tay","keyword":"loa karaoke bluetooth xách tay","must_contain":"karaoke","fallback_keyword":"loa karaoke"},
+ {"group":"Sửa nhà","req_name":"Bột thông cống","keyword":"bột thông cống","must_contain":"thông cống","fallback_keyword":"thông cống"},
+ {"group":"Cá nhân","req_name":"Xịt khử mùi giày","keyword":"xịt khử mùi giày","must_contain":"giày","fallback_keyword":"khử mùi giày"},
+ {"group":"Sức khỏe","req_name":"Kính lão gấp gọn","keyword":"kính lão gấp","must_contain":"kính","fallback_keyword":"kính lão"},
+ {"group":"Cá nhân","req_name":"Xịt thơm miệng","keyword":"xịt thơm miệng","must_contain":"thơm miệng","fallback_keyword":"xịt thơm miệng"},
+ {"group":"Sức khỏe","req_name":"Gối massage cổ vai gáy","keyword":"gối massage cổ vai gáy","must_contain":"massage","fallback_keyword":"máy massage cổ"},
+ {"group":"Dụng cụ","req_name":"Đèn pin đội đầu siêu sáng","keyword":"đèn pin đội đầu siêu sáng","must_contain":"đèn","fallback_keyword":"đèn pin đội đầu"},
+ {"group":"An ninh","req_name":"Camera wifi trong nhà xoay 360","keyword":"camera wifi trong nhà 360","must_contain":"camera","fallback_keyword":"camera wifi"},
+ {"group":"An ninh, sân vườn","req_name":"Đèn năng lượng mặt trời","keyword":"đèn năng lượng mặt trời","must_contain":"năng lượng","fallback_keyword":"đèn năng lượng mặt trời"},
+ {"group":"Gia dụng","req_name":"Ly giữ nhiệt inox 316","keyword":"ly giữ nhiệt inox 316","must_contain":"giữ nhiệt","fallback_keyword":"ly giữ nhiệt"},
+ {"group":"An ninh, xe","req_name":"Thẻ định vị Bluetooth","keyword":"thiết bị định vị bluetooth","must_contain":"định vị","fallback_keyword":"định vị mini"},
+ {"group":"Gia dụng","req_name":"Vợt muỗi điện","keyword":"vợt muỗi điện","must_contain":"muỗi","fallback_keyword":"vợt muỗi"},
+ {"group":"Sức khỏe","req_name":"Máy đo huyết áp","keyword":"máy đo huyết áp bắp tay","must_contain":"huyết áp","fallback_keyword":"máy đo huyết áp"},
+ {"group":"Sửa nhà","req_name":"Máy khoan pin","keyword":"máy khoan pin","must_contain":"khoan","fallback_keyword":"máy khoan"},
+ {"group":"Xe cộ, nhà","req_name":"Máy rửa xe gia đình","keyword":"máy rửa xe gia đình","must_contain":"rửa xe","fallback_keyword":"máy rửa xe"}
+]
