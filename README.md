@@ -5,3 +5,4 @@
 - `san-pham-dan-ong-40.xlsx` — tên, giá, hoa hồng, lượt bán, thông tin sản phẩm + hook, link affiliate, link kèm Sub_id
 - `anh/<STT>-<mã link>/` — ảnh sản phẩm
 - `ds-20-sp.json` — từ khóa tìm kiếm; `crawl.py` — script crawl qua PostForge (ADB)
+- `tong-hop-40-sp/` — 40 sản phẩm cho nam (4 nhóm bình luận BL01–BL04), link + Sub_id, kèm ảnh từng sản phẩm
