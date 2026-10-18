@@ -6,3 +6,4 @@
 - `anh/<STT>-<mã link>/` — ảnh sản phẩm
 - `ds-20-sp.json` — từ khóa tìm kiếm; `crawl.py` — script crawl qua PostForge (ADB)
 - `tong-hop-40-sp/` — 40 sản phẩm cho nam (4 nhóm bình luận BL01–BL04), link + Sub_id, kèm ảnh từng sản phẩm
+- `chi-giang-hieu-chuyen/` — toàn bộ handoff kênh Chị Giang Hiểu Chuyện (masterplan, sản phẩm Shopee, kịch bản, prompt, ảnh, video mẫu)

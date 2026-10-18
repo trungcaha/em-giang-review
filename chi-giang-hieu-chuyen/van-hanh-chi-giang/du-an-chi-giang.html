@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vận hành Chị Giang</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f0f3f6; --ink:#16202a; --ink-2:#4b5866; --ink-3:#7a8794;
+  --line:#e2e7ec; --brand:#0f4c5c; --brand-ink:#ffffff; --accent:#e36414;
+  --ok:#1f8a4c; --ok-bg:#e3f4ea; --warn:#b4610a; --warn-bg:#fdf1dc; --bad:#c0362c; --bad-bg:#fbe5e3;
+  --t1:#2563eb; --t2:#db2777; --t3:#ea580c; --t4:#16a34a; --t5:#7c3aed;
+  --radius:12px; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1418; --surface:#171e24; --surface-2:#1f2830; --ink:#e7edf2; --ink-2:#aab6c1; --ink-3:#7f8c98;
+    --line:#2a343d; --brand:#5fb3c4; --brand-ink:#0b1a1e; --accent:#ff8c42;
+    --ok:#4cc584; --ok-bg:#163325; --warn:#f0a94b; --warn-bg:#3a2a12; --bad:#ff7b70; --bad-bg:#3d1c19;
+    --t1:#6b9cff; --t2:#f472b6; --t3:#fb923c; --t4:#4ade80; --t5:#a78bfa;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1418; --surface:#171e24; --surface-2:#1f2830; --ink:#e7edf2; --ink-2:#aab6c1; --ink-3:#7f8c98;
+  --line:#2a343d; --brand:#5fb3c4; --brand-ink:#0b1a1e; --accent:#ff8c42;
+  --ok:#4cc584; --ok-bg:#163325; --warn:#f0a94b; --warn-bg:#3a2a12; --bad:#ff7b70; --bad-bg:#3d1c19;
+  --t1:#6b9cff; --t2:#f472b6; --t3:#fb923c; --t4:#4ade80; --t5:#a78bfa;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+header.top{background:var(--brand);color:var(--brand-ink);padding:28px 0 22px}
+header.top h1{margin:0 0 4px;font-size:28px;line-height:1.2;letter-spacing:-.01em}
+header.top p{margin:0;opacity:.88}
+.toprow{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.themebtn{background:transparent;border:1px solid currentColor;color:inherit;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px;opacity:.9}
+.stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:20px}
+.stat{background:rgba(255,255,255,.1);border-radius:10px;padding:10px 12px}
+:root[data-theme="dark"] .stat{background:rgba(0,0,0,.12)}
+.stat b{display:block;font-size:22px;line-height:1.2}
+.stat span{font-size:12.5px;opacity:.85}
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs .wrap::-webkit-scrollbar{display:none}
+nav.tabs button{flex:0 0 auto;border:0;background:none;color:var(--ink-2);font:inherit;font-size:14px;padding:13px 12px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+main{padding:22px 0 60px}
+section.tab{display:none}
+section.tab.on{display:block}
+h2{font-size:21px;margin:0 0 4px;letter-spacing:-.01em}
+h3{font-size:16px;margin:24px 0 10px}
+.lead{color:var(--ink-2);margin:0 0 18px;max-width:820px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.alerts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.alert{border-left:4px solid var(--bad);background:var(--bad-bg);border-radius:10px;padding:12px 14px}
+.alert.w{border-color:var(--warn);background:var(--warn-bg)}
+.alert.o{border-color:var(--ok);background:var(--ok-bg)}
+.alert b{display:block;margin-bottom:4px}
+.alert p{margin:0;font-size:14px;color:var(--ink-2)}
+.muted{color:var(--ink-3);font-size:13px}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:600;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.pill.A{background:var(--ok-bg);color:var(--ok)} .pill.B{background:var(--warn-bg);color:var(--warn)} .pill.C{background:var(--surface-2);color:var(--ink-3)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.kdot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline}
+.chcard{border-top:4px solid var(--c);display:flex;flex-direction:column;gap:8px}
+.chcard h4{margin:0;font-size:17px}
+.chcard .code{font-weight:700;color:var(--c)}
+.chcard ul{margin:0;padding-left:18px;font-size:14px}
+.chcard .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;background:var(--surface-2);border-radius:6px;padding:3px 8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12.5px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.03em;background:var(--surface-2);position:sticky;top:0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ctr{text-align:center}
+.heat td.cell{text-align:center;font-weight:600;font-variant-numeric:tabular-nums;min-width:44px}
+.journey{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
+.jstep{flex:1 1 150px;border-radius:10px;padding:12px;border:1px solid var(--line);background:var(--surface);position:relative}
+.jstep b{color:var(--c)}
+.jarrow{align-self:center;color:var(--ink-3);font-size:20px}
+.hub{margin-top:10px;border:2px dashed var(--k5);border-radius:10px;padding:10px 14px;font-size:14px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.fstep{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;position:relative}
+.fstep .n{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--brand);color:var(--brand-ink);align-items:center;justify-content:center;font-weight:700;font-size:13px;margin-bottom:6px}
+.fstep b{display:block;margin-bottom:4px}
+.fstep .who{font-size:12.5px;color:var(--accent);font-weight:600}
+.fstep p{margin:6px 0 0;font-size:13px;color:var(--ink-2)}
+.role{display:flex;flex-direction:column;gap:6px}
+.role .head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.role .cnt{font-size:24px;font-weight:700;color:var(--brand)}
+.role p{margin:0;font-size:14px;color:var(--ink-2)}
+.calc{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:14px}
+.calc label{display:flex;flex-direction:column;font-size:13px;color:var(--ink-2);gap:4px}
+.calc input,.filters input,.filters select{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-width:0}
+.calc input{width:110px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.filters input{flex:1 1 220px}
+.r-R{background:#cfe3ff;color:#123a75} .r-A{background:#ffd9a8;color:#6b3a00} .r-C{background:#e2f3fb;color:#14536b} .r-I{background:var(--surface-2);color:var(--ink-3)}
+:root[data-theme="dark"] .r-R{background:#1d3557;color:#cfe3ff} :root[data-theme="dark"] .r-A{background:#4a3010;color:#ffd9a8} :root[data-theme="dark"] .r-C{background:#15333f;color:#bfe6f5}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .r-R{background:#1d3557;color:#cfe3ff}:root:not([data-theme="light"]) .r-A{background:#4a3010;color:#ffd9a8}:root:not([data-theme="light"]) .r-C{background:#15333f;color:#bfe6f5}}
+.raci td.ctr{font-weight:700}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.check:last-child{border-bottom:0}
+.check input{margin-top:4px;width:17px;height:17px;accent-color:var(--brand);flex:0 0 auto}
+.check.done .t{text-decoration:line-through;color:var(--ink-3)}
+.check .meta{font-size:12.5px;color:var(--ink-3)}
+.overdue{color:var(--bad);font-weight:600}
+.progress{height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin:6px 0 14px}
+.progress i{display:block;height:100%;background:var(--ok);width:0;transition:width .25s}
+.timeline{display:grid;grid-template-columns:110px 1fr;gap:0}
+.timeline div{padding:8px 10px;border-bottom:1px solid var(--line);font-size:14px}
+.timeline .t{font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums}
+.btn{display:inline-block;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:4px 10px;font-size:13px;cursor:pointer;text-decoration:none;white-space:nowrap;font:inherit;font-size:13px}
+.btn:hover{border-color:var(--brand)}
+.btn.pri{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.phase{display:grid;grid-template-columns:220px 1fr 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.phase:last-child{border-bottom:0}
+.phase .gate{font-size:14px;color:var(--ink-2)}
+.phase .gate::before{content:"Qua cửa: ";font-weight:600;color:var(--ink)}
+svg text{fill:var(--ink-2);font-size:11px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-2);margin-top:6px}
+.small{font-size:13px}
+.copied{color:var(--ok)!important;border-color:var(--ok)!important}
+footer{color:var(--ink-3);font-size:13px;padding:20px 0 40px;border-top:1px solid var(--line)}
+.formgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:8px 0 12px}
+.formgrid label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink-2)}
+.formgrid .full{grid-column:1/-1}
+.formgrid input,.formgrid select,.formgrid textarea{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:100%;min-width:0}
+.formgrid textarea{resize:vertical}
+.srcgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.src{display:flex;flex-direction:column;gap:8px;min-width:0}
+.src-head{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.src p{margin:0;font-size:14px;overflow-wrap:anywhere}
+.src-media{background:var(--surface-2);border-radius:10px;min-height:110px;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center;padding:0}
+.src-media .hint{padding:14px;font-size:13px;color:var(--ink-3)}
+.src-media iframe{border:0;width:100%;display:block;background:#000}
+.src-media iframe.tt{height:580px}
+.src-media iframe.v{aspect-ratio:9/16;height:auto;max-height:620px}
+.src-media iframe.h{aspect-ratio:16/9;height:auto}
+.src-media iframe.post{height:520px;background:#fff}
+.playbtn{font:inherit;font-weight:600;border:0;background:var(--brand);color:var(--brand-ink);border-radius:999px;padding:10px 18px;cursor:pointer;margin:20px}
+.pill.plat-TikTok{background:#111;color:#fff}
+.pill.plat-Facebook{background:#1877f2;color:#fff}
+.pill.plat-YouTube{background:#d91c12;color:#fff}
+.pill.plat-Instagram{background:#b82f7a;color:#fff}
+.pill.st-new{background:var(--warn-bg);color:var(--warn)}
+.pill.st-done{background:var(--ok-bg);color:var(--ok)}
+.src-preview{margin:0 0 12px;max-width:340px}
+.src-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.src-actions select{font:inherit;font-size:13px;padding:4px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.tag-local{font-size:11.5px;color:var(--accent);font-weight:600}
+@media (max-width:1000px){.srcgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.srcgrid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}}
+
+@media (max-width:1000px){.g5{grid-template-columns:repeat(2,minmax(0,1fr))}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.g2,.g3,.alerts{grid-template-columns:1fr}.phase{grid-template-columns:1fr}.g5{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}header.top h1{font-size:22px}.timeline{grid-template-columns:92px 1fr}}
+@media (max-width:480px){.flow{grid-template-columns:1fr}}
+@media print{nav.tabs,.themebtn{display:none}section.tab{display:block!important;page-break-before:always}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="toprow">
+      <div>
+        <h1 id="pname"></h1>
+        <p id="psub"></p>
+      </div>
+      <button class="themebtn" id="themebtn" type="button">Giao diện sáng / tối</button>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+<nav class="tabs" aria-label="Mục"><div class="wrap" id="tabbar" role="tablist"></div></nav>
+<main class="wrap" id="main"></main>
+<footer class="wrap">Bản trực quan để xem và giao việc. Số liệu sống (đơn, hoa hồng, trạng thái từng video) nằm ở file Excel <b>van-hanh-kenh-chi-giang.xlsx</b>. Dấu tick việc làm chỉ lưu trên trình duyệt của máy đang mở.</footer>
+
+<script id="data" type="application/json">{"project": {"name": "Kênh Chị Giang Hiểu Chuyện", "subtitle": "Hỏi đáp sinh lý – vợ chồng cho đàn ông 45+ · Affiliate Shopee · Facebook Reels", "goal": "8 video/ngày từ tuần 4 (≈240 video/tháng), mỗi video có link Shopee kèm Sub_id riêng", "start": "19/10", "today": "2026-10-16", "north_star": "Hoa hồng Shopee affiliate mỗi tuần"}, "channel": {"code": "CG", "name": "Chị Giang Hiểu Chuyện", "page": "Chị Giang Hiểu Chuyện", "postiz_id": "cmup0vxri0002qxtax0kkxduf", "folder": "D:\\video-ai-aff\\viral-studio-downloads\\videos\\gioi-tinh", "status": "Đang chạy, đã có ~150 video hỏi đáp; chưa có script Postiz tự động cho page này", "host": "Chị Giang (ảnh chuẩn chi-giang-loat-2/nhan-vat-chi.png): áo scrubs xanh ngọc cổ V, tóc nâu đen dài, xưng “chị”. Vai phụ: “cô bạn lo lắng” (cùng gương mặt, kính đen tròn, áo hoa) hoặc người chồng.", "format": "Hỏi đáp “Chị ơi, cho em hỏi thầm…”: 70 giây · 7 shot · băng chữ đỏ ghi câu hỏi. Review sản phẩm: 50 giây · 5 shot · sản phẩm trong tay từ giây đầu.", "tool": "Viral Studio (studio_create, nguyên văn master prompt + ảnh nhân vật) → xuất MP4 9:16 → Postiz", "audience": [["Giới tính", "Nam ~90%"], ["Tuổi", "45–54: 27,1% · 55–64: 25,3% · 65+: 20,3% · 35–44: 15,3% → 73% từ 45 tuổi"], ["Quốc gia", "Việt Nam 92% · Mỹ 6,2% (kiều bào, đang tăng)"], ["Thành phố", "TP.HCM 53,3% (tăng 5 điểm trong 3 ngày) · Hà Nội 8% · Quảng Nam 8% · Đà Nẵng 5,8% · Cà Mau 5,3%"]], "voice": ["Chị xưng “chị”, gọi người xem là “mấy anh”, “anh”; người hỏi gọi “chị ơi”", "KHÔNG xưng hay được gọi là bác sĩ, dược sĩ, chuyên gia; không áo blouse, không ống nghe", "Giọng và từ ngữ miền Nam, nhịp chậm, chữ to; tránh tiếng lóng giới trẻ", "Nói kiểu chia sẻ kiến thức: không tục, không tả hành vi chi tiết, không hình gợi dục", "Sản phẩm: video hỏi đáp nhắc đúng 1 lần ở cuối; chỉ nói “hỗ trợ” + triệu chứng, không “chữa”, không “tăng sinh lý”"]}, "pillars": [{"code": "T1", "name": "Phong độ & tiết niệu", "color": "#2563eb", "desc": "Tiểu đêm, tiền liệt tuyến, ra ít, hết hứng tuổi 50, rượu thuốc, kẽm", "examples": ["Đêm dậy tiểu 3–4 lần là bị gì?", "Ngoài 50 ra ít, loãng là thiếu gì?", "Về hưu tự nhiên hết hứng, tại sao?"], "products": [4, 1, 5, 3, 2]}, {"code": "T2", "name": "Chuyện vợ chồng", "color": "#db2777", "desc": "Vợ mãn kinh, vợ khô, vợ né chồng, hiểu vợ, vệ sinh trước khi gần", "examples": ["Vợ mãn kinh né chồng có phải hết thương?", "Vợ nói “em mệt” là thật hay giả?", "Bao lâu không gần nhau là báo động?"], "products": [6, 20, 23, 7, 8]}, {"code": "T3", "name": "Bệnh nền & chuyện ấy", "color": "#ea580c", "desc": "Huyết áp, tiểu đường, mỡ máu, đau lưng, mất ngủ, chuột rút ảnh hưởng chuyện vợ chồng", "examples": ["Uống thuốc huyết áp có làm yếu chuyện ấy?", "Đau lưng thoát vị có nên gần vợ?", "Đêm chuột rút bắp chân là thiếu gì?"], "products": [11, 19, 12, 13, 15, 14, 9, 10]}, {"code": "T4", "name": "Phong độ bề ngoài", "color": "#16a34a", "desc": "Tóc bạc, vợ chê già, mùi – ngứa vùng kín, đồ lót, tài xế ngồi nhiều", "examples": ["Tóc bạc trắng, vợ chê già?", "Ngứa, mùi vùng kín đàn ông do đâu?", "Mặc quần lót chật ảnh hưởng gì?"], "products": [18, 16, 17, 6]}, {"code": "T5", "name": "Sống khỏe tuổi 50+", "color": "#7c3aed", "desc": "Mỏi lưng, cổ vai gáy, móng chân, quà cho vợ, quà Tết cho ba", "examples": ["Mỏi lưng mùa lạnh làm sao cho đỡ?", "Móng chân dày, quặp cắt sao khỏi đau?", "Quà Tết cho ba: đừng mua rượu"], "products": [20, 19, 21, 22]}], "maxDay": 8, "subPrefix": "ChiGiang", "weeks": [{"week": 1, "start": "19/10", "end": "25/10", "event": "Chạy lại nhịp đăng bằng Postiz · 20/10 Ngày Phụ nữ VN: quà cho vợ", "T1": 2, "T2": 1, "T3": 1, "T4": 1, "T5": 0, "total": 5, "startIso": "2026-10-19"}, {"week": 2, "start": "26/10", "end": "01/11", "event": "Đo giữ chân 3 giây và click theo trụ cột", "T1": 2, "T2": 1, "T3": 1, "T4": 1, "T5": 1, "total": 6, "startIso": "2026-10-26"}, {"week": 3, "start": "02/11", "end": "08/11", "event": "Kịch bản sale 11.11", "T1": 3, "T2": 1, "T3": 1, "T4": 1, "T5": 1, "total": 7, "startIso": "2026-11-02"}, {"week": 4, "start": "09/11", "end": "15/11", "event": "11.11 (thứ Tư) · ĐỦ 8 video/ngày", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-11-09"}, {"week": 5, "start": "16/11", "end": "22/11", "event": "19/11 Ngày Quốc tế Nam giới · review tháng 1", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-11-16"}, {"week": 6, "start": "23/11", "end": "29/11", "event": "Black Friday 27/11: sản phẩm giá cao", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-11-23"}, {"week": 7, "start": "30/11", "end": "06/12", "event": "Trời lạnh: tiểu đêm, đau khớp tăng", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-11-30"}, {"week": 8, "start": "07/12", "end": "13/12", "event": "12.12 (thứ Bảy)", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-12-07"}, {"week": 9, "start": "14/12", "end": "20/12", "event": "Tất niên, nhậu nhiều: kẽm, bổ thận", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-12-14"}, {"week": 10, "start": "21/12", "end": "27/12", "event": "Noel 24–25/12", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-12-21"}, {"week": 11, "start": "28/12", "end": "03/01", "event": "Tết Dương lịch · lên kịch bản Tết", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2026-12-28"}, {"week": 12, "start": "04/01", "end": "10/01", "event": "Review quý · quà Tết cho ba, phủ bạc đón Tết", "T1": 3, "T2": 2, "T3": 1, "T4": 1, "T5": 1, "total": 8, "startIso": "2027-01-04"}], "phases": [{"phase": "Giai đoạn 0 – Dựng nền móng", "time": "16/10 – 18/10", "goal": "Link Shopee sạch kèm Sub_id, script Postiz cho page, khuôn prompt hỏi đáp gắn sản phẩm + review, đệm 2 ngày video", "gate": "Chạy thử trọn 1 video hỏi đáp gắn SP và 1 video review: Viral Studio → QC → Postiz → link ở bình luận gốc"}, {"phase": "Giai đoạn 1 – Chạy lại nhịp đăng", "time": "19/10 – 01/11 (tuần 1–2)", "goal": "5–6 video/ngày đúng giờ. Đo giữ chân 3 giây, click link, đơn theo Sub_id từng video", "gate": "Page không bị cảnh báo hay hạn chế · QC đạt ≥ 90% · đăng đúng lịch ≥ 90%"}, {"phase": "Giai đoạn 2 – Đủ 8 video/ngày", "time": "02/11 – 15/11 (tuần 3–4)", "goal": "Lên 7 rồi 8 video/ngày. Chạy chiến dịch 11.11", "gate": "Có đơn đầu tiên qua Sub_id · đệm video ≥ 2 ngày"}, {"phase": "Giai đoạn 3 – Tối ưu", "time": "16/11 – 29/11 (tuần 5–6)", "goal": "Nhân bản top 3 video/tuần. Ngày Quốc tế Nam giới 19/11, Black Friday 27/11", "gate": "Biết trụ cột và sản phẩm nào ra đơn; cắt sản phẩm hạng C không đơn"}, {"phase": "Giai đoạn 4 – Mùa cuối năm & Tết", "time": "30/11 – 10/01 (tuần 7–12)", "goal": "12.12, Noel, tất niên, chuẩn bị Tết 2027 (06/02): quà Tết cho ba, phủ bạc tóc", "gate": "Review quý: đủ số liệu thì cân nhắc mở kênh thứ hai cho cùng tệp (ví dụ page Ông Giang Sức Khỏe)"}], "products": [{"stt": 1, "group": "1. Sinh lý & tiết niệu", "name": "Kẽm DSD Multi Ginseng B+ Plus 150mg (60 viên)", "shopee": "Viên Uống Kẽm DSD Multi Ginseng B+ Plus 150mg Hộp 60 Viên - Vitamin B & Nhân Sâm - Bổ Sung Kẽm, Tăng Cường Sức Khỏe", "price": 175750, "hh": 0.075, "per_order": 13181, "link": "https://s.shopee.vn/4fx1tDnhTe", "code": "4fx1tDnhTe", "sublink": "https://s.shopee.vn/4fx1tDnhTe?sub_id=ChiGiang-Chung-FBReels-SP01", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\4fx1tDnhTe", "images": 6, "ch": "T1", "ch2": "", "tier": "B", "angle": "Đàn ông nhậu nhiều, ra mồ hôi nhiều dễ hụt kẽm: hay mệt, rụng tóc, ra ít", "note": ""}, {"stt": 2, "group": "1. Sinh lý & tiết niệu", "name": "Viên Bổ Thận DSD Sâm Nhung", "shopee": "TPBVSK Viên Bổ Thận DSD Sâm Nhung Bổ Thận hỗ trợ bổ huyết, dưỡng thận, cải thiện đau lưng mỏi gối. Hộp 1 lọ x 60 viên", "price": 215000, "hh": 0.175, "per_order": 37625, "link": "https://s.shopee.vn/5AtIVGl1EU", "code": "5AtIVGl1EU", "sublink": "https://s.shopee.vn/5AtIVGl1EU?sub_id=ChiGiang-Chung-FBReels-SP02", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\5AtIVGl1EU", "images": 5, "ch": "T1", "ch2": "T5", "tier": "A", "angle": "Đêm tiểu nhiều, sáng lưng mỏi nhừ, chiều về hết hứng", "note": "Đợt đầu crawl nhầm “Sâm Nhung Bổ Thận New” 35k – đã crawl lại đúng hàng DSD"}, {"stt": 3, "group": "1. Sinh lý & tiết niệu", "name": "Vương Bảo Thái Minh (tiền liệt tuyến)", "shopee": "Vương Bảo Thái Minh - Viên uống hỗ trợ giảm kích thước tuyến tiền liệt ở nam giới - Hộp 20 viên - lọ 80 viên", "price": 275000, "hh": 0.025, "per_order": 6875, "link": "https://s.shopee.vn/gQt7yIJF2", "code": "gQt7yIJF2", "sublink": "https://s.shopee.vn/gQt7yIJF2?sub_id=ChiGiang-Chung-FBReels-SP03", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\gQt7yIJF2", "images": 6, "ch": "T1", "ch2": "", "tier": "C", "angle": "Đêm dậy tiểu 3–4 lần, tiểu xong còn nhỏ giọt", "note": ""}, {"stt": 4, "group": "1. Sinh lý & tiết niệu", "name": "Viên Thận Botamax", "shopee": "Viên Thận BOTAMAX - Hỗ trợ bổ thận, cải thiện chức năng thận, giảm đau lưng, mỏi gối, tiểu nhiều lần - Lọ 60/90 Viên", "price": 265000, "hh": 0.175, "per_order": 46375, "link": "https://s.shopee.vn/Lo2jOzo00", "code": "Lo2jOzo00", "sublink": "https://s.shopee.vn/Lo2jOzo00?sub_id=ChiGiang-Chung-FBReels-SP04", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\Lo2jOzo00", "images": 6, "ch": "T1", "ch2": "", "tier": "A", "angle": "Thận yếu có phải yếu sinh lý? – lưng mỏi, tiểu đêm", "note": ""}, {"stt": 5, "group": "1. Sinh lý & tiết niệu", "name": "Kẽm ADA 150mg", "shopee": "Kẽm ADA 150mg Kẽm Gluconate Nguyên Liệu Nhập Pháp. - Hỗ trợ tăng cường sức khỏe, đề kháng", "price": 67000, "hh": 0.175, "per_order": 11725, "link": "https://s.shopee.vn/6AlpgAUH53", "code": "6AlpgAUH53", "sublink": "https://s.shopee.vn/6AlpgAUH53?sub_id=ChiGiang-Chung-FBReels-SP05", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\6AlpgAUH53", "images": 5, "ch": "T1", "ch2": "", "tier": "B", "angle": "Kẽm uống lúc nào cho đúng, uống bao lâu mới thấy khác", "note": ""}, {"stt": 6, "group": "1. Sinh lý & tiết niệu", "name": "Bọt vệ sinh nam Oniiz (combo)", "shopee": "Bộ 6 Bọt vệ sinh nam Oniiz, Combo 3 Bọt vệ sinh, Dung dịch Masculine Foam Plus hương nước hoa, cocktail 100ml và 145ml", "price": 259000, "hh": 0.045, "per_order": 11655, "link": "https://s.shopee.vn/6fi6I4Q0Hu", "code": "6fi6I4Q0Hu", "sublink": "https://s.shopee.vn/6fi6I4Q0Hu?sub_id=ChiGiang-Chung-FBReels-SP06", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\6fi6I4Q0Hu", "images": 3, "ch": "T4", "ch2": "T2", "tier": "B", "angle": "Ngứa, mùi, mồ hôi vùng kín; vệ sinh trước khi gần vợ", "note": ""}, {"stt": 8, "group": "1. Sinh lý & tiết niệu", "name": "Bao cao su Durex Performa", "shopee": "Bao Cao Su Durex PERFORMA ,Kéo Dài Thời Gian, Siêu Mỏng, Nhiều Gel - Hộp 12 chiếc", "price": 20000, "hh": 0.135, "per_order": 2700, "link": "https://s.shopee.vn/7VHDHhq6DU", "code": "7VHDHhq6DU", "sublink": "https://s.shopee.vn/7VHDHhq6DU?sub_id=ChiGiang-Chung-FBReels-SP08", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\7VHDHhq6DU", "images": 6, "ch": "T2", "ch2": "", "tier": "C", "angle": "Vợ chồng lớn tuổi có cần dùng bao không", "note": "Giá trên link là phân loại nhỏ nhất – kiểm tra giá hộp 12 trước khi làm video"}, {"stt": 9, "group": "2. Bệnh nền", "name": "Gel xoa bóp xương khớp Phục Thể An (Musecos)", "shopee": "[LOẠI 1] Gel Xoa Bóp Xương Khớp Musecos Phục Thể An - Giảm Đau Nhức Vai Gáy, Tê Mỏi Tay Chân, Thẩm Thấu Nhanh (Tuýp 50g)", "price": 24402, "hh": 0.025, "per_order": 610, "link": "https://s.shopee.vn/3Vl4VSZVgM", "code": "3Vl4VSZVgM", "sublink": "https://s.shopee.vn/3Vl4VSZVgM?sub_id=ChiGiang-Chung-FBReels-SP09", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\3Vl4VSZVgM", "images": 4, "ch": "T3", "ch2": "T5", "tier": "C", "angle": "Đau lưng, mỏi gối mùa lạnh – thoa tại chỗ", "note": "Giá trên link là phân loại nhỏ nhất"}, {"stt": 10, "group": "2. Bệnh nền", "name": "Linh Chi Thiên Ma Thấu Cốt Hoàn", "shopee": "Linh Chi Thiên Ma Thấu Cốt Hoàn", "price": 78000, "hh": 0.025, "per_order": 1950, "link": "https://s.shopee.vn/4B0lIkf37r", "code": "4B0lIkf37r", "sublink": "https://s.shopee.vn/4B0lIkf37r?sub_id=ChiGiang-Chung-FBReels-SP10", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\4B0lIkf37r", "images": 4, "ch": "T3", "ch2": "", "tier": "C", "angle": "Đau khớp gối khi trời trở lạnh", "note": ""}, {"stt": 11, "group": "2. Bệnh nền", "name": "Máy đo huyết áp Omron HEM-7180", "shopee": "Máy Đo Huyết Áp Bắp Tay Tự Động Omron Ez Lite HEM-7180 |Thương Hiệu Nhật Bản, Bảo Hành 5 Năm", "price": 932000, "hh": 0.045, "per_order": 41940, "link": "https://s.shopee.vn/W7Sw3QIXS", "code": "W7Sw3QIXS", "sublink": "https://s.shopee.vn/W7Sw3QIXS?sub_id=ChiGiang-Chung-FBReels-SP11", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\W7Sw3QIXS", "images": 5, "ch": "T3", "ch2": "T5", "tier": "A", "angle": "Uống thuốc huyết áp có làm yếu chuyện ấy? – tự đo ở nhà; quà Tết cho ba", "note": ""}, {"stt": 12, "group": "2. Bệnh nền", "name": "Máy đo huyết áp AICARE X1 có giọng nói", "shopee": "Máy Đo Huyết Áp Bắp Tay Tự Động Chính Hãng AICARE X1, Giọng Nói Tiếng Việt Dễ Sử Dụng Tại Nhà", "price": 289000, "hh": 0.025, "per_order": 7225, "link": "https://s.shopee.vn/9KirSKa8Oy", "code": "9KirSKa8Oy", "sublink": "https://s.shopee.vn/9KirSKa8Oy?sub_id=ChiGiang-Chung-FBReels-SP12", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\9KirSKa8Oy", "images": 5, "ch": "T3", "ch2": "T5", "tier": "C", "angle": "Ba mẹ mắt kém tự đo, máy đọc to kết quả", "note": "Rẻ hơn Omron nhưng hoa hồng 2,5%"}, {"stt": 13, "group": "2. Bệnh nền", "name": "Viên dây thìa canh Diabetna (tiểu đường)", "shopee": "Viên uống dây thìa canh Diabetna Ích Nhân dành cho người tiểu đường - giúp làm giảm đường huyết biến chứng hộp 120V", "price": 31000, "hh": 0.115, "per_order": 3565, "link": "https://s.shopee.vn/3LReJLo8Kh", "code": "3LReJLo8Kh", "sublink": "https://s.shopee.vn/3LReJLo8Kh?sub_id=ChiGiang-Chung-FBReels-SP13", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\3LReJLo8Kh", "images": 5, "ch": "T3", "ch2": "", "tier": "C", "angle": "Tiểu đường và chuyện ấy", "note": ""}, {"stt": 14, "group": "2. Bệnh nền", "name": "Miếng dán chân Ông Lão Bắc Kinh", "shopee": "Miếng Dán Chân Thải Độc Ông Lão Bắc Kinh Hộp, Giúp Ngủ Ngon Giảm Nhức Mỏi Thải Độc Chân Thanh Lọc Độc Tố Cơ Thể YDPharma", "price": 19900, "hh": 0.115, "per_order": 2288, "link": "https://s.shopee.vn/2VsXJrtSkF", "code": "2VsXJrtSkF", "sublink": "https://s.shopee.vn/2VsXJrtSkF?sub_id=ChiGiang-Chung-FBReels-SP14", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\2VsXJrtSkF", "images": 5, "ch": "T3", "ch2": "T5", "tier": "C", "angle": "2 giờ sáng vẫn nằm đếm quạt trần", "note": ""}, {"stt": 15, "group": "2. Bệnh nền", "name": "Viên magie hữu cơ + B6", "shopee": "Viên Uống Bổ Sung Magie Hữu Cơ - Vitamin B6 - TPBVSK Giúp Giảm Căng Thẳng, Lo Âu, Chuột Rút, Đau Mỏi Cơ, Hỗ Trợ Giấc Ngủ", "price": 37000, "hh": 0.095, "per_order": 3515, "link": "https://s.shopee.vn/1BN9jSjzRA", "code": "1BN9jSjzRA", "sublink": "https://s.shopee.vn/1BN9jSjzRA?sub_id=ChiGiang-Chung-FBReels-SP15", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\1BN9jSjzRA", "images": 5, "ch": "T3", "ch2": "", "tier": "C", "angle": "Đêm chuột rút bắp chân, ngủ không sâu", "note": ""}, {"stt": 16, "group": "3. Ngoại hình & tự tin", "name": "Dầu gội phủ bạc Nezha 400ml", "shopee": "Dầu gội phủ bạc Nezha 400ml chính hãng. Dầu gội nhuộm tóc ĐEN, NÂU bền màu. Dưỡng Tóc Chăm Sóc Tóc Nam Nữ", "price": 120000, "hh": 0.145, "per_order": 17400, "link": "https://s.shopee.vn/40hL6imMMV", "code": "40hL6imMMV", "sublink": "https://s.shopee.vn/40hL6imMMV?sub_id=ChiGiang-Chung-FBReels-SP16", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\40hL6imMMV", "images": 4, "ch": "T4", "ch2": "T5", "tier": "B", "angle": "Tóc bạc trắng đầu, vợ chê già – gội 1 lần là đen", "note": ""}, {"stt": 17, "group": "3. Ngoại hình & tự tin", "name": "Dầu gội phủ bạc thảo dược Kim Thảo (nâu coffee)", "shopee": "Dầu gội Nhuộm tóc thảo dược Màu Nâu Coffee phủ bạc KIM THẢO chính hãng Lên màu tự nhiên, an toàn chuẩn salon tại nhà", "price": 19500, "hh": 0.185, "per_order": 3608, "link": "https://s.shopee.vn/4qGS6IXjTc", "code": "4qGS6IXjTc", "sublink": "https://s.shopee.vn/4qGS6IXjTc?sub_id=ChiGiang-Chung-FBReels-SP17", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\4qGS6IXjTc", "images": 5, "ch": "T4", "ch2": "", "tier": "C", "angle": "Ngại ra tiệm nhuộm: gội phủ bạc tại nhà, màu nâu tự nhiên", "note": "Crawl tìm bút phủ bạc nhưng ra dầu gội Kim Thảo – vẫn hợp chủ đề"}, {"stt": 18, "group": "3. Ngoại hình & tự tin", "name": "Quần boxer nam thông hơi Natural Breath (combo 3)", "shopee": "Quần boxer nam sịp đùi thông hơi thoáng mát combo 3 quần NATURAL BREATH trunk modal gỗ sồi BOXERMAN", "price": 249430, "hh": 0.17, "per_order": 42403, "link": "https://s.shopee.vn/9V2Hev1YVq", "code": "9V2Hev1YVq", "sublink": "https://s.shopee.vn/9V2Hev1YVq?sub_id=ChiGiang-Chung-FBReels-SP18", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\9V2Hev1YVq", "images": 5, "ch": "T4", "ch2": "", "tier": "A", "angle": "Tài xế, ngồi nhiều: vùng kín nóng bí, quần chật", "note": ""}, {"stt": 19, "group": "4. Đời sống", "name": "Đai lưng tự nóng Kazumi", "shopee": "Đai lưng tự nóng KAZUMI  hỗ trợ cột sống giảm đau mỏi và hỗ trợ thoát vị đĩa đệm hiệu quả - Bản POR", "price": 202000, "hh": 0.105, "per_order": 21210, "link": "https://s.shopee.vn/113jXLfZSC", "code": "113jXLfZSC", "sublink": "https://s.shopee.vn/113jXLfZSC?sub_id=ChiGiang-Chung-FBReels-SP19", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\113jXLfZSC", "images": 4, "ch": "T3", "ch2": "T5", "tier": "A", "angle": "Đau lưng, thoát vị, mỏi lưng mùa lạnh", "note": ""}, {"stt": 20, "group": "4. Đời sống", "name": "Gối massage hồng ngoại Kingtech KP-315", "shopee": "Gối Massage Nhiệt Hồng Ngoại Cao Cấp KINGTECH KP-315 - 4 Bóng Xoay - Chuyên Sâu Cổ Vai Gáy, Thắt Lưng - Chính Hãng", "price": 675540, "hh": 0.045, "per_order": 30399, "link": "https://s.shopee.vn/1LgZw0Yxv6", "code": "1LgZw0Yxv6", "sublink": "https://s.shopee.vn/1LgZw0Yxv6?sub_id=ChiGiang-Chung-FBReels-SP20", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\1LgZw0Yxv6", "images": 5, "ch": "T5", "ch2": "T2", "tier": "A", "angle": "Cổ vai gáy cứng đơ; quà cho ba, chồng tặng vợ", "note": ""}, {"stt": 21, "group": "4. Đời sống", "name": "Máy massage cầm tay mini", "shopee": "Máy Massage Cầm Tay Mini, Súng Massage Cầm Tay Mini Toàn Thân 6 Cấp Độ Chuyên Sâu Đa Năng - HKDOTI", "price": 120000, "hh": 0.025, "per_order": 3000, "link": "https://s.shopee.vn/2gBxWVFPSZ", "code": "2gBxWVFPSZ", "sublink": "https://s.shopee.vn/2gBxWVFPSZ?sub_id=ChiGiang-Chung-FBReels-SP21", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\2gBxWVFPSZ", "images": 5, "ch": "T5", "ch2": "T2", "tier": "C", "angle": "Chồng massage cho vợ – quà 20/10", "note": ""}, {"stt": 22, "group": "4. Đời sống", "name": "Kềm cắt móng Kềm Nghĩa M.401", "shopee": "Kềm Nghĩa Kềm Cắt Móng M.401 Thiết Kế Lưỡi Kềm Mỏ Vịt Hỗ Trợ Cắt Móng Quặp và Tay Cầm Mạ Mờ", "price": 88000, "hh": 0.025, "per_order": 2200, "link": "https://s.shopee.vn/AUuoqwSmIs", "code": "AUuoqwSmIs", "sublink": "https://s.shopee.vn/AUuoqwSmIs?sub_id=ChiGiang-Chung-FBReels-SP22", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\AUuoqwSmIs", "images": 4, "ch": "T5", "ch2": "", "tier": "C", "angle": "Móng chân dày, quặp, cắt không nổi", "note": ""}, {"stt": 23, "group": "4. Đời sống", "name": "Trà mâm xôi sâm tố nữ A Nam", "shopee": "Trà Mâm Xôi 4 Vị Tiệm Trà A NAM - Sâm Tố Nữ & Lá Mâm Xôi Khô, Hỗ Trợ Bổ Huyết Điều Kinh Đẹp Da. 1", "price": 7200, "hh": 0.125, "per_order": 900, "link": "https://s.shopee.vn/30onvCyWAQ", "code": "30onvCyWAQ", "sublink": "https://s.shopee.vn/30onvCyWAQ?sub_id=ChiGiang-Chung-FBReels-SP23", "folder": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images\\30onvCyWAQ", "images": 5, "ch": "T2", "ch2": "", "tier": "C", "angle": "Vợ tiền mãn kinh hay cáu, bốc hỏa – chồng mua tặng vợ", "note": ""}], "ideas": [{"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "Đêm dậy tiểu 3–4 lần là bị gì?", "hook": "Mấy anh ngoài năm mươi, đêm dậy mấy lần?", "scene": "Phòng ngủ đèn vàng, 2 giờ sáng", "sp": 3}, {"pl": "T1", "type": "Review sản phẩm", "title": "Review Viên Thận Botamax: lưng mỏi, tiểu đêm", "hook": "Anh nào đêm dậy tiểu, sáng lưng mỏi nhừ, coi hết video này", "scene": "Bàn trà phòng khách", "sp": 4}, {"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "Tiểu xong còn nhỏ giọt có sao không?", "hook": "Kéo khóa rồi mà vẫn còn… anh có bị vậy không?", "scene": "Hành lang nhà, ánh sáng sáng sớm", "sp": 3}, {"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "Thận yếu có phải yếu sinh lý?", "hook": "Ai nói thận yếu là yếu chuyện ấy? Chị nói thiệt nè", "scene": "Quán cà phê cóc vỉa hè", "sp": 4}, {"pl": "T1", "type": "Review sản phẩm", "title": "Review sâm nhung bổ thận", "hook": "Sáng dậy lưng mỏi nhừ, chiều về hết hứng?", "scene": "Phòng khách có tủ thờ", "sp": 2}, {"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "Ngoài 50 ra ít, loãng là thiếu gì?", "hook": "Lớn tuổi ra ít là bình thường hay thiếu chất?", "scene": "Ban công nhiều cây", "sp": 1}, {"pl": "T1", "type": "Review sản phẩm", "title": "Review Kẽm DSD: đàn ông nhậu nhiều dễ thiếu kẽm", "hook": "Ngoài 40 hay mệt, rụng tóc, ăn không ngon?", "scene": "Bàn nhậu sau bữa tiệc", "sp": 1}, {"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "Về hưu tự nhiên hết hứng, tại sao?", "hook": "Nghỉ hưu rảnh rang mà sao chuyện ấy lại nguội?", "scene": "Sân nhà, ghế bố", "sp": 1}, {"pl": "T1", "type": "Hỏi đáp", "title": "Sáng thức dậy không còn “chào cờ” có đáng lo?", "hook": "Mấy anh để ý buổi sáng chưa?", "scene": "Phòng ngủ buổi sáng, rèm mở", "sp": null}, {"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "Rượu thuốc ngâm có bổ thật không?", "hook": "Bình rượu ngâm trong nhà anh có gì trong đó?", "scene": "Góc tủ rượu", "sp": 2}, {"pl": "T1", "type": "Hỏi đáp", "title": "Trứng vịt lộn, hàu có tăng bản lĩnh thật không?", "hook": "Ăn hột vịt lộn mỗi tối có được gì?", "scene": "Quán ốc vỉa hè Sài Gòn", "sp": null}, {"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "19/11 Quốc tế Nam giới: 3 việc đàn ông 50 nên làm", "hook": "Hôm nay ngày của mấy anh, chị hỏi thiệt", "scene": "Phòng khách trang trí nhẹ", "sp": 3}, {"pl": "T1", "type": "Tình huống vợ chồng", "title": "Vợ hỏi: sao dạo này anh dậy đêm hoài?", "hook": "Anh đi đâu mà đêm nào cũng dậy vậy?", "scene": "Phòng ngủ, vợ ngồi dậy bật đèn", "sp": 3}, {"pl": "T1", "type": "Hỏi đáp gắn SP", "title": "Kẽm uống lúc nào cho đúng?", "hook": "Uống kẽm lúc đói là sai rồi nha", "scene": "Bếp buổi sáng", "sp": 5}, {"pl": "T1", "type": "Hỏi đáp", "title": "Ngoài 50 bao lâu gần vợ một lần là vừa?", "hook": "Câu này mấy anh hỏi chị nhiều nhất", "scene": "Ghế đá công viên", "sp": null}, {"pl": "T2", "type": "Hỏi đáp gắn SP", "title": "Vợ mãn kinh né chồng, đừng vội nghĩ hết thương", "hook": "Vợ né anh có phải vì hết thương?", "scene": "Phòng khách buổi tối", "sp": 23}, {"pl": "T2", "type": "Hỏi đáp", "title": "Vợ khô có phải hết thương?", "hook": "Câu này nhiều anh hiểu sai lắm", "scene": "Phòng ngủ đèn ngủ", "sp": null}, {"pl": "T2", "type": "Tình huống vợ chồng", "title": "20/10 tặng vợ tuổi 50 cái gì cho vợ vui?", "hook": "Hai mươi tháng mười rồi, anh mua gì cho vợ chưa?", "scene": "Chợ hoa, cầm bó hoa", "sp": 23}, {"pl": "T2", "type": "Hỏi đáp", "title": "Vợ nói “em mệt” là thật hay giả?", "hook": "Vợ nói em mệt, anh hiểu sao?", "scene": "Bếp tối, vợ rửa chén", "sp": null}, {"pl": "T2", "type": "Hỏi đáp gắn SP", "title": "Vợ chồng lớn tuổi có cần dùng bao?", "hook": "Vợ mãn kinh rồi thì khỏi cần, đúng không?", "scene": "Phòng khách", "sp": 8}, {"pl": "T2", "type": "Hỏi đáp", "title": "Bao lâu không gần nhau là báo động?", "hook": "Một tháng, ba tháng hay một năm?", "scene": "Quán cà phê sân vườn", "sp": null}, {"pl": "T2", "type": "Hỏi đáp gắn SP", "title": "Vệ sinh trước khi gần vợ – điều vợ ngại nói", "hook": "Có một chuyện vợ anh không dám nói", "scene": "Phòng tắm sạch sẽ, khăn treo", "sp": 6}, {"pl": "T2", "type": "Tình huống vợ chồng", "title": "Chồng massage cho vợ, vợ cảm động", "hook": "Ba chục năm mới thấy ổng làm vậy", "scene": "Phòng khách, sofa", "sp": 21}, {"pl": "T2", "type": "Hỏi đáp", "title": "Vì sao vợ đòi tắt đèn?", "hook": "Vợ đòi tắt đèn là vì ngại hay vì giận?", "scene": "Phòng ngủ", "sp": null}, {"pl": "T2", "type": "Hỏi đáp", "title": "Vợ thích được khen điều gì nhất?", "hook": "Khen vợ đẹp là chưa đủ đâu mấy anh", "scene": "Bữa cơm gia đình", "sp": null}, {"pl": "T3", "type": "Hỏi đáp gắn SP", "title": "Uống thuốc huyết áp có làm yếu chuyện ấy?", "hook": "Uống thuốc huyết áp xong anh thấy khác không?", "scene": "Bàn làm việc có hộp thuốc", "sp": 11}, {"pl": "T3", "type": "Review sản phẩm", "title": "Review máy đo huyết áp Omron: tự đo ở nhà", "hook": "Đo huyết áp ở nhà mà số nhảy lung tung?", "scene": "Phòng khách nhà ba mẹ", "sp": 11}, {"pl": "T3", "type": "Hỏi đáp gắn SP", "title": "Tiểu đường và chuyện ấy", "hook": "Đường huyết cao thì chuyện ấy ra sao?", "scene": "Bếp, bữa sáng", "sp": 13}, {"pl": "T3", "type": "Hỏi đáp gắn SP", "title": "Đau lưng thoát vị có nên gần vợ?", "hook": "Lưng đau mà vợ rủ, làm sao đây?", "scene": "Phòng ngủ, gối tựa lưng", "sp": 19}, {"pl": "T3", "type": "Review sản phẩm", "title": "Review đai lưng tự nóng Kazumi: đau lưng mùa lạnh", "hook": "Trời trở lạnh, lưng nhức hả mấy anh?", "scene": "Ghế bố ngoài hiên", "sp": 19}, {"pl": "T3", "type": "Hỏi đáp gắn SP", "title": "Đêm chuột rút bắp chân là thiếu gì?", "hook": "Đang ngủ bị vọp bẻ, anh làm gì đầu tiên?", "scene": "Phòng ngủ ban đêm", "sp": 15}, {"pl": "T3", "type": "Hỏi đáp gắn SP", "title": "Ngủ không sâu thì bản lĩnh cũng xuống", "hook": "Hai giờ sáng vẫn nằm đếm quạt trần?", "scene": "Phòng ngủ quạt trần", "sp": 14}, {"pl": "T3", "type": "Hỏi đáp gắn SP", "title": "Mỡ máu cao ảnh hưởng chuyện ấy ra sao?", "hook": "Bụng to, mỡ máu cao, chuyện ấy có sao không?", "scene": "Quán bún bò buổi sáng", "sp": 11}, {"pl": "T3", "type": "Hỏi đáp gắn SP", "title": "Đau khớp gối mùa lạnh", "hook": "Gối kêu lục cục mỗi lần đứng dậy?", "scene": "Cầu thang nhà", "sp": 10}, {"pl": "T3", "type": "Hỏi đáp", "title": "Sau đặt stent gần vợ được không?", "hook": "Mới đặt stent, bao lâu mới được gần vợ?", "scene": "Phòng khách", "sp": null}, {"pl": "T3", "type": "Hỏi đáp", "title": "Gút và chuyện ấy", "hook": "Gút sưng chân, chuyện ấy có bị gì không?", "scene": "Bàn nhậu hải sản", "sp": null}, {"pl": "T4", "type": "Review sản phẩm", "title": "Review dầu gội phủ bạc Nezha: gội một lần tóc đen", "hook": "Tóc bạc trắng đầu, gội một lần là đen?", "scene": "Phòng tắm, chú Tư làm mẫu", "sp": 16}, {"pl": "T4", "type": "Hỏi đáp gắn SP", "title": "Tóc bạc sớm, vợ chê già", "hook": "Vợ nói anh nhìn già hơn tuổi?", "scene": "Tiệm hớt tóc", "sp": 16}, {"pl": "T4", "type": "Hỏi đáp gắn SP", "title": "Ngại ra tiệm nhuộm: gội phủ bạc tại nhà", "hook": "Ra tiệm nhuộm mất cả buổi, ở nhà gội mười lăm phút?", "scene": "Trước gương phòng tắm", "sp": 17}, {"pl": "T4", "type": "Hỏi đáp gắn SP", "title": "Ngứa, mùi vùng kín đàn ông do đâu?", "hook": "Ngứa mà không dám gãi trước mặt ai?", "scene": "Phòng tắm", "sp": 6}, {"pl": "T4", "type": "Review sản phẩm", "title": "Review bọt vệ sinh nam Oniiz", "hook": "Đàn ông cũng cần dung dịch vệ sinh riêng?", "scene": "Phòng tắm", "sp": 6}, {"pl": "T4", "type": "Hỏi đáp gắn SP", "title": "Mặc quần lót chật ảnh hưởng gì?", "hook": "Quần lót mấy năm chưa thay, anh có không?", "scene": "Phòng ngủ, tủ đồ", "sp": 18}, {"pl": "T4", "type": "Hỏi đáp gắn SP", "title": "Tài xế ngồi nhiều: vùng kín nóng bí", "hook": "Chạy xe cả ngày, chỗ đó nóng như lò?", "scene": "Cabin xe tải / xe ôm công nghệ", "sp": 18}, {"pl": "T4", "type": "Review sản phẩm", "title": "Review quần boxer thông hơi: tài xế, ngồi nhiều", "hook": "Quần lót mặc cả ngày mà không bí, có không?", "scene": "Cabin xe, tủ đồ", "sp": 18}, {"pl": "T4", "type": "Hỏi đáp", "title": "Bụng bia và chuyện ấy", "hook": "Bụng to che mất tầm nhìn rồi mấy anh", "scene": "Quán nhậu", "sp": null}, {"pl": "T5", "type": "Review sản phẩm", "title": "Review gối massage hồng ngoại: cổ vai gáy", "hook": "Cổ vai gáy cứng đơ, mười lăm phút là nhẹ người?", "scene": "Sofa phòng khách", "sp": 20}, {"pl": "T5", "type": "Hỏi đáp gắn SP", "title": "Mỏi cổ vai gáy vì coi điện thoại nhiều", "hook": "Coi điện thoại cả ngày, cổ cứng đơ?", "scene": "Ghế bố, điện thoại", "sp": 20}, {"pl": "T5", "type": "Tình huống vợ chồng", "title": "Quà cho ba dịp cuối năm: gối massage hồng ngoại", "hook": "Ba nói không cần gì, nhưng ba cần cái này", "scene": "Phòng khách, con trai tặng quà", "sp": 20}, {"pl": "T5", "type": "Hỏi đáp gắn SP", "title": "Móng chân dày, quặp: cắt sao cho khỏi đau?", "hook": "Móng chân dày như vỏ ốc, cắt không nổi?", "scene": "Hiên nhà, ghế đẩu", "sp": 22}, {"pl": "T5", "type": "Tình huống vợ chồng", "title": "Quà Tết cho ba: đừng mua rượu", "hook": "Tết này mua gì cho ba ngoài rượu?", "scene": "Phòng khách ngày Tết", "sp": 11}, {"pl": "T5", "type": "Hỏi đáp", "title": "Đàn ông 50 nên đi bộ bao nhiêu mỗi ngày?", "hook": "Mười ngàn bước hay ba ngàn bước?", "scene": "Công viên sáng sớm", "sp": null}, {"pl": "T5", "type": "Từ bình luận", "title": "Hỏi đáp từ bình luận tuần này (Chủ nhật)", "hook": "Tuần này mấy anh hỏi chị nhiều nhất câu này", "scene": "Quán cà phê, cầm điện thoại đọc bình luận", "sp": null}], "roles": [{"code": "R1", "role": "Điều phối kiêm trưởng nội dung", "count": "1", "cap": null, "duty": "Chọn chủ đề tuần, duyệt prompt trong 4 giờ, giữ giọng Chị Giang và luật xưng hô, bảng từ cấm, quyết định nhân bản hay cắt sản phẩm", "output": "Duyệt 8–12 prompt/ngày; 56 ý tưởng/tuần vào KHO_KICH_BAN", "kpi": "Hoa hồng/tuần · giữ chân 3 giây ≥ 30% · prompt đạt ngay lần đầu ≥ 80%", "tools": "File vận hành này, báo cáo Shopee affiliate, FB Insights", "report": "—"}, {"code": "R2", "role": "Biên kịch – master prompt", "count": "=ROUNDUP(B4/B5,0)", "cap": "kb", "duty": "Viết master prompt theo khuôn “Chị ơi, cho em hỏi thầm” (70s/7 shot) hoặc review (50s/5 shot), trước ngày đăng 2 ngày; sản phẩm nhắc đúng 1 lần", "output": "15 prompt/người/ngày", "kpi": "Prompt đạt duyệt/ngày · tỷ lệ phải sửa", "tools": "Skill master-prompt, chi-giang-loat-2/_tao-prompt-*.py, chi-giang-review-san-pham", "report": "R1"}, {"code": "R3", "role": "Sản xuất video (Viral Studio)", "count": "=ROUNDUP(B4/B6,0)", "cap": "dung", "duty": "Xếp hàng studio_create (nguyên văn master prompt + ảnh nhân vật), soát mặt nhân vật từng shot, tạo lại shot lỗi, xuất MP4 9:16, đặt tên đúng quy tắc", "output": "10 video đạt QC/người/ngày", "kpi": "Video đạt QC/ngày · tỷ lệ phải làm lại ≤ 10%", "tools": "Skill viral-studio-tao-video, viral-studio-theo-doi", "report": "R1"}, {"code": "R4", "role": "Đăng bài, cộng đồng & dữ liệu", "count": "=ROUNDUP(B4/B7,0)", "cap": "qc", "duty": "QC 10 điểm, lên lịch Postiz 8 khung giờ, link kèm Sub_id ở bình luận gốc, trực bình luận/inbox, kiểm tra link thứ Hai, nhập số liệu ngày", "output": "8 bài/ngày đúng giờ, đúng link; số liệu trước 10:00", "kpi": "Đúng lịch 100% · 0 bài sai link · phản hồi bình luận trong 12 giờ", "tools": "Postiz (mlabai.uk), Shopee affiliate, Meta Business Suite, PostForge", "report": "R1"}], "capacity": {"target": 8, "kb": 15, "dung": 10, "qc": 40}, "sop": [{"n": "1", "task": "Lên kho ý tưởng tuần", "when": "Chủ nhật", "r": "R1", "c": "R4", "inp": "Bình luận hay, báo cáo đơn theo Sub_id, top video, KaloData", "out": "56 ý tưởng trong KHO_KICH_BAN (trạng thái “Ý tưởng”), đủ 5 trụ cột"}, {"n": "2", "task": "Viết master prompt", "when": "Trước ngày đăng 2 ngày", "r": "R2", "c": "R1", "inp": "Ý tưởng + khuôn hỏi đáp hoặc review + ảnh nhân vật", "out": "File prompt .md, trạng thái “Chờ duyệt”"}, {"n": "3", "task": "Duyệt prompt", "when": "Trong 4 giờ", "r": "R1", "c": "R2", "inp": "Prompt chờ duyệt + bảng từ cấm", "out": "“Đã duyệt” hoặc “Cần sửa” kèm góp ý"}, {"n": "4", "task": "Xếp hàng Viral Studio", "when": "Trước ngày đăng 1 ngày", "r": "R3", "c": "R1", "inp": "Prompt đã duyệt, nhan-vat-chi.png", "out": "studio_create; trạng thái “Đang sản xuất”"}, {"n": "5", "task": "Soát shot & xuất video", "when": "Trong ngày", "r": "R3", "c": "R4", "inp": "Video Viral Studio", "out": "Làm lại shot lỗi; MP4 1080×1920, trạng thái “QC”"}, {"n": "6", "task": "Kiểm tra chất lượng (QC)", "when": "Trong ngày sản xuất", "r": "R4", "c": "R1", "inp": "Video + checklist 10 điểm", "out": "Đạt → “Sẵn sàng đăng”; lỗi → trả R3"}, {"n": "7", "task": "Lên lịch đăng", "when": "Trước 17:00 ngày trước", "r": "R4", "c": "R1", "inp": "Video sẵn sàng + link kèm Sub_id (cột I của KHO_KICH_BAN)", "out": "Postiz: Reel + link ở bình luận gốc, trạng thái “Đã đăng”"}, {"n": "8", "task": "Trực bình luận, inbox", "when": "10:00 và 21:00", "r": "R4", "c": "R1", "inp": "Bài đã đăng", "out": "Ghim link, trả lời, ẩn bình luận tục, gom câu hỏi"}, {"n": "9", "task": "Nhập số liệu", "when": "Mỗi ngày trước 10:00", "r": "R4", "c": "R1", "inp": "Shopee affiliate (lọc theo Sub_id) + FB Insights", "out": "THEO_DOI_NGAY và cột View/Click/Đơn của KHO_KICH_BAN"}, {"n": "10", "task": "Review tuần", "when": "Chủ nhật 19:00", "r": "R1", "c": "Cả team", "inp": "TONG_QUAN, top 3 video, đơn theo Sub_id", "out": "5 biến thể cho mỗi top video; danh sách cắt/nhân sản phẩm"}], "raci": {"1": {"R1": "A", "R2": "C", "R4": "C"}, "2": {"R1": "A", "R2": "R"}, "3": {"R1": "R", "R2": "I"}, "4": {"R1": "I", "R3": "R"}, "5": {"R1": "A", "R3": "R", "R4": "I"}, "6": {"R1": "A", "R3": "I", "R4": "R"}, "7": {"R1": "I", "R4": "R"}, "8": {"R1": "I", "R4": "R"}, "9": {"R1": "I", "R4": "R"}, "10": {"R1": "A", "R2": "C", "R3": "C", "R4": "R"}}, "raciRoles": ["R1", "R2", "R3", "R4"], "qc": ["Hook 3 giây: câu hỏi nóng, băng chữ đỏ ghi đúng câu hỏi", "Gương mặt Chị Giang đúng ảnh chuẩn, đồng nhất mọi shot; trang phục đúng", "Không xưng hay được gọi bác sĩ, dược sĩ, chuyên gia; không áo blouse, ống nghe", "Không tục, không tả hành vi chi tiết, không hình gợi dục (kể cả ảnh bìa)", "Không cam kết y tế: không “chữa”, “trị dứt”, “tăng sinh lý”; thực phẩm chức năng có câu “không phải là thuốc”", "Sản phẩm nhắc đúng 1 lần (video hỏi đáp), đúng sản phẩm của link sẽ gắn", "Giọng miền Nam, gọi “anh”, “mấy anh”; nhịp chậm, rõ", "Tiếng rõ, khớp miệng, không đứt giữa các shot; chữ không sai chính tả", "Đúng 1080×1920, đúng thời lượng (70s hỏi đáp, 50s review), không đen hình đầu/cuối", "Bối cảnh khác video hôm trước (không lặp khuôn); tên file đúng quy tắc"], "rhythm": [{"t": "08:30", "task": "Họp nhanh 10 phút", "who": "Cả team", "note": "Hôm qua xong gì, hôm nay làm gì, vướng gì"}, {"t": "09:00 – 11:00", "task": "Viết lô prompt T+2 · xếp hàng Viral Studio lô T+1", "who": "R2, R3", "note": ""}, {"t": "10:00", "task": "Nhập số liệu hôm qua · trực bình luận lần 1", "who": "R4", "note": ""}, {"t": "11:00 – 11:30", "task": "Duyệt prompt đợt 1", "who": "R1", "note": ""}, {"t": "13:30 – 16:00", "task": "Soát shot, xuất video · QC", "who": "R3, R4", "note": ""}, {"t": "16:00", "task": "Duyệt prompt đợt 2", "who": "R1", "note": ""}, {"t": "17:00", "task": "Chốt lịch đăng ngày mai trên Postiz", "who": "R4", "note": "Đủ 8 bài, link kèm Sub_id"}, {"t": "21:00", "task": "Trực bình luận lần 2", "who": "R4", "note": "Giờ tệp nam 45+ lướt nhiều"}], "rituals": [{"when": "Hằng ngày", "what": "Họp nhanh 08:30", "who": "R1"}, {"when": "Chủ nhật", "what": "Review tuần: top 3 video → 5 biến thể; cắt sản phẩm 20 video không đơn", "who": "R1"}, {"when": "Thứ Hai", "what": "Kiểm tra toàn bộ link Shopee, giá, hoa hồng (đổi theo chiến dịch)", "who": "R4"}, {"when": "Thứ Sáu", "what": "Lọc NGUON_CONTENT: nguồn “Mới” → chọn 10 ý tưởng sang KHO_KICH_BAN", "who": "R1"}, {"when": "Ngày 1 hằng tháng", "what": "Review tháng: trụ cột, sản phẩm; tìm sản phẩm mới bằng KaloData + crawl Shopee", "who": "R1"}, {"when": "Trước mỗi đợt sale", "what": "Kịch bản sale riêng: 11.11, 19/11, Black Friday, 12.12, Tết", "who": "R1"}], "slots": [{"t": "05:45", "type": "Hỏi đáp (không sản phẩm)", "goal": "Kéo view giờ cà phê sáng", "prod": "Không"}, {"t": "07:30", "type": "Review sản phẩm – hạng A", "goal": "Ra đơn", "prod": "Có (1 sản phẩm)"}, {"t": "11:30", "type": "Hỏi đáp gắn SP – T3 bệnh nền", "goal": "Ra đơn giờ nghỉ trưa", "prod": "Có (nhắc 1 lần)"}, {"t": "13:00", "type": "Tình huống vợ chồng", "goal": "Bình luận, chia sẻ", "prod": "Tùy tập"}, {"t": "17:30", "type": "Hỏi đáp gắn SP – T1 phong độ", "goal": "Ra đơn giờ tan làm", "prod": "Có (nhắc 1 lần)"}, {"t": "20:00", "type": "Review sản phẩm – hạng A khác buổi sáng", "goal": "Ra đơn giờ vàng", "prod": "Có (1 sản phẩm)"}, {"t": "21:30", "type": "Hỏi đáp gắn SP – T2 chuyện vợ chồng", "goal": "Giờ vàng chủ đề nhạy cảm", "prod": "Có (nhắc 1 lần)"}, {"t": "22:45", "type": "Hỏi đáp (không sản phẩm)", "goal": "Giữ lượt tiếp cận cuối ngày", "prod": "Không"}], "themes": [{"day": "Thứ 2", "theme": "Sai lầm đàn ông hay mắc", "color": "Quán cà phê cóc vỉa hè", "prod": "Kẽm DSD / Kẽm ADA"}, {"day": "Thứ 3", "theme": "Hiểu vợ (T2)", "color": "Phòng khách buổi tối", "prod": "Gối massage (chồng tặng vợ) / Oniiz"}, {"day": "Thứ 4", "theme": "Bệnh nền & chuyện ấy (T3)", "color": "Bàn làm việc, hộp thuốc", "prod": "Máy đo Omron / đai lưng tự nóng"}, {"day": "Thứ 5", "theme": "Tiểu đêm, thận, tiền liệt tuyến (T1)", "color": "Phòng ngủ đèn vàng", "prod": "Botamax / Vương Bảo"}, {"day": "Thứ 6", "theme": "Phong độ bề ngoài (T4)", "color": "Tiệm hớt tóc, phòng tắm", "prod": "Quần boxer thông hơi / phủ bạc Nezha"}, {"day": "Thứ 7", "theme": "Tình huống vợ chồng cuối tuần", "color": "Bữa cơm gia đình, quán nhậu", "prod": "Combo 2 sản phẩm"}, {"day": "Chủ nhật", "theme": "Hỏi đáp từ bình luận", "color": "Quán cà phê sân vườn", "prod": "Sản phẩm bán tốt nhất tuần"}], "season": [{"when": "20/10", "ev": "Ngày Phụ nữ Việt Nam", "dir": "“Tặng vợ tuổi 50 cái gì”: gối massage hồng ngoại, trà sâm tố nữ"}, {"when": "Tháng 10–12", "ev": "Trời trở lạnh", "dir": "Tiểu đêm tăng, đau khớp: Botamax, đai lưng tự nóng, gối massage"}, {"when": "10–11/11", "ev": "Sale 11.11", "dir": "3 ngày trước sale: tăng review lên 3/8 video; máy đo Omron, gối massage (giá cao)"}, {"when": "19/11", "ev": "Ngày Quốc tế Nam giới", "dir": "Tuần sức khỏe đàn ông: Botamax, kẽm, tiền liệt tuyến, tầm soát"}, {"when": "27/11", "ev": "Black Friday", "dir": "Sản phẩm giá cao: máy đo Omron, gối massage hồng ngoại, combo quần boxer"}, {"when": "12/12", "ev": "Sale 12.12 (thứ Bảy)", "dir": "Như 11.11; thêm combo quà cho ba"}, {"when": "Cuối năm", "ev": "Tất niên, nhậu nhiều", "dir": "“Rượu bia và chuyện ấy”: kẽm, Botamax"}, {"when": "24–25/12", "ev": "Noel", "dir": "Tình huống vợ chồng: quà cuối năm cho nhau"}, {"when": "Tháng 1/2027", "ev": "Chuẩn bị Tết 2027 (Tết 06/02)", "dir": "Quà Tết cho ba (máy đo Omron, gối massage), phủ bạc Nezha đón Tết"}], "kpi": [{"m": "Giữ chân 3 giây", "where": "Từng video", "th": "< 30%", "act": "Viết lại câu hỏi mở đầu, đổi băng chữ đỏ"}, {"m": "Click link / lượt xem", "where": "Từng sản phẩm", "th": "< 0,3%", "act": "Đổi góc kể, đổi khung giờ, đổi câu dẫn link ở bình luận"}, {"m": "Đơn / sản phẩm / tuần (theo Sub_id)", "where": "Báo cáo Shopee", "th": "Top 3", "act": "Tăng gấp đôi số video cho sản phẩm đó"}, {"m": "Đơn / trụ cột / 3 tuần", "where": "Từng trụ cột", "th": "0 đơn sau ~40 video", "act": "Đổi sản phẩm của trụ cột, giữ trụ cột nếu view tốt"}, {"m": "Sản phẩm hạng C", "where": "Từng sản phẩm", "th": "20 video không đơn", "act": "Bỏ khỏi kế hoạch"}, {"m": "Đăng đúng lịch", "where": "Từng ngày", "th": "< 90%", "act": "R1 kiểm tra nút thắt: prompt hay Viral Studio"}, {"m": "QC đạt", "where": "Toàn team", "th": "< 90%", "act": "Siết checklist, sửa khuôn prompt"}, {"m": "Cảnh báo/hạn chế từ Facebook", "where": "Page", "th": "Bất kỳ", "act": "Dừng tăng sản lượng, rà lời thoại và ảnh bìa 7 ngày gần nhất"}], "risks": [{"risk": "Facebook gắn cờ nội dung tình dục, hạn chế page", "lvl": "Cao", "fix": "Giọng chia sẻ kiến thức; bảng từ cấm; không hình gợi dục kể cả ảnh bìa; QC điểm 4. Đây là page duy nhất – mất page là mất hết", "owner": "R1"}, {"risk": "Quảng cáo thực phẩm chức năng sai luật (“tăng sinh lý”, “chữa”)", "lvl": "Cao", "fix": "Chỉ nói “hỗ trợ” + triệu chứng; câu “không phải là thuốc”; QC điểm 5", "owner": "R4"}, {"risk": "Nhân vật bị hiểu là bác sĩ thật", "lvl": "Cao", "fix": "Luật xưng hô trong mọi prompt; không blouse, ống nghe; QC điểm 3", "owner": "R1"}, {"risk": "Hoa hồng Shopee của thực phẩm chức năng thấp (2,5–7,5%)", "lvl": "Trung bình", "fix": "Xếp hạng theo hoa hồng/đơn trên Shopee, không theo TikTok; ưu tiên sản phẩm đơn cao (máy đo, massage); kiểm tra lại mỗi thứ Hai", "owner": "R4"}, {"risk": "Nhóm hàng nhạy cảm bị chặn link", "lvl": "Trung bình", "fix": "Gel bôi trơn: crawl 2 lần không lấy được link nên chưa dùng; bao cao su Durex lấy được (13,5%). Thử lấy link gel bằng tay trên app (việc T03); không được thì chỉ làm video kiến thức", "owner": "R4"}, {"risk": "Viral Studio hết lượt, phiên đăng nhập hết hạn, hàng đợi đứng", "lvl": "Trung bình", "fix": "Đệm video 2 ngày; skill viral-studio-sua-loi; theo dõi bằng viral-studio-theo-doi", "owner": "R3"}, {"risk": "Gương mặt nhân vật lệch giữa các video", "lvl": "Trung bình", "fix": "Luôn đính kèm nhan-vat-chi.png; prompt bắt tạo ẢNH NHÂN VẬT CHUẨN trước; QC điểm 2", "owner": "R3"}, {"risk": "Link affiliate hết hạn hoặc sản phẩm hết hàng", "lvl": "Trung bình", "fix": "Kiểm tra link thứ Hai; có sản phẩm thay thế cùng nhóm", "owner": "R4"}, {"risk": "Bình luận tục, spam, tranh cãi", "lvl": "Trung bình", "fix": "Ẩn bình luận theo từ khóa; trực 2 lần/ngày", "owner": "R4"}, {"risk": "Postiz giới hạn ~30 request/giờ", "lvl": "Thấp", "fix": "8 bài × 2 request/ngày, script tự chờ", "owner": "R4"}, {"risk": "Đăng dày làm giảm reach", "lvl": "Thấp", "fix": "Tăng sản lượng theo lộ trình, có điều kiện qua cửa", "owner": "R1"}], "resources": [{"name": "Kho master prompt Chị Giang (prompt 17–235)", "path": "D:\\video-ai-aff\\chi-giang-loat-2", "use": "Mẫu giọng văn, khuôn hỏi đáp 70s, script _tao-prompt-*.py"}, {"name": "Ảnh nhân vật chuẩn", "path": "D:\\video-ai-aff\\chi-giang-loat-2\\nhan-vat-chi.png", "use": "Đính kèm mọi lần chạy Viral Studio"}, {"name": "6 kịch bản review sản phẩm", "path": "D:\\video-ai-aff\\chi-giang-review-san-pham\\kich-ban-6-video.md", "use": "Khuôn review 50s"}, {"name": "Danh sách sản phẩm + link Shopee + ảnh", "path": "D:\\video-ai-aff\\san-pham-kenh-chi-giang.xlsx", "use": "Nguồn của sheet SAN_PHAM (crawl bằng PostForge)"}, {"name": "Ảnh sản phẩm", "path": "D:\\video-ai-aff\\shopee-aff-crawler\\storage\\images", "use": "Mỗi sản phẩm 1 thư mục"}, {"name": "Số liệu KaloData 30 ngày (TikTok)", "path": "D:\\video-ai-aff\\research\\chi-giang-sp\\kalodata-tu-khoa-30ngay.txt", "use": "Chỉ tham khảo nhu cầu – giá, hoa hồng dùng theo Shopee"}, {"name": "Thư mục video của kênh", "path": "D:\\video-ai-aff\\viral-studio-downloads\\videos\\gioi-tinh", "use": "Video xuất xong lưu ở đây"}, {"name": "Mẫu script đăng Postiz", "path": "D:\\video-ai-aff\\viral-studio-downloads\\postiz-giot-lanh.py", "use": "Nhân bản thành postiz-gioi-tinh.py"}, {"name": "Postiz", "path": "https://mlabai.uk", "use": "Page Chị Giang: cmup0vxri0002qxtax0kkxduf"}, {"name": "PostForge (crawl Shopee)", "path": "http://127.0.0.1:8765", "use": "Lấy link s.shopee.vn, ảnh, hoa hồng"}, {"name": "Skill viết prompt", "path": "master-prompt", "use": "Gọi trong Claude Code"}, {"name": "Skill tạo và theo dõi video", "path": "viral-studio-tao-video, viral-studio-theo-doi", "use": "Gọi trong Claude Code"}, {"name": "Skill dữ liệu TikTok Shop", "path": "kalodata", "use": "Tìm sản phẩm mới"}, {"name": "Skill crawl Shopee", "path": "postforge-shopee-crawler", "use": "Tìm link affiliate + ảnh"}], "tasks": [{"id": "T01", "task": "Chốt người làm R1–R4, điền tên vào NHAN_SU", "role": "R1", "due": "2026-10-16", "dueTxt": "16/10", "phase": "Giai đoạn 0"}, {"id": "T02", "task": "Kiểm tra 22 link Shopee: còn hàng, đúng giá và hoa hồng; đổi “Trạng thái link” sang OK", "role": "R4", "due": "2026-10-17", "dueTxt": "17/10", "phase": "Giai đoạn 0"}, {"id": "T03", "task": "Thử lấy link gel bôi trơn bằng tay trên app Shopee (crawler không sao chép được); kiểm tra giá hộp 12 của bao cao su Durex", "role": "R4", "due": "2026-10-17", "dueTxt": "17/10", "phase": "Giai đoạn 0"}, {"id": "T04", "task": "Viết khuôn master prompt “hỏi đáp gắn SP” (nhắc sản phẩm 1 lần cuối video) và khuôn review 50s", "role": "R1", "due": "2026-10-17", "dueTxt": "17/10", "phase": "Giai đoạn 0"}, {"id": "T05", "task": "Bảng từ cấm + câu bắt buộc cho thực phẩm chức năng", "role": "R1", "due": "2026-10-17", "dueTxt": "17/10", "phase": "Giai đoạn 0"}, {"id": "T06", "task": "Tạo script postiz-gioi-tinh.py: 8 khung giờ, link kèm Sub_id ở bình luận gốc", "role": "R4", "due": "2026-10-18", "dueTxt": "18/10", "phase": "Giai đoạn 0"}, {"id": "T07", "task": "Đệm 2 ngày: 12 video (lô 20/10 có video quà cho vợ)", "role": "R3", "due": "2026-10-18", "dueTxt": "18/10", "phase": "Giai đoạn 0"}, {"id": "T08", "task": "Lấy số liệu nền 30 ngày của page: view TB/video, click, đơn → thay giả định ở DU_BAO", "role": "R4", "due": "2026-10-18", "dueTxt": "18/10", "phase": "Giai đoạn 0"}, {"id": "T09", "task": "Chạy thử trọn 1 video hỏi đáp gắn SP + 1 review → qua cửa giai đoạn 0", "role": "R1", "due": "2026-10-18", "dueTxt": "18/10", "phase": "Giai đoạn 0"}, {"id": "T10", "task": "Đăng video 20/10 “tặng vợ tuổi 50 cái gì”", "role": "R4", "due": "2026-10-20", "dueTxt": "20/10", "phase": "Giai đoạn 1"}, {"id": "T11", "task": "Kịch bản 11.11 (review giá cao, combo)", "role": "R1", "due": "2026-11-05", "dueTxt": "05/11", "phase": "Giai đoạn 2"}, {"id": "T12", "task": "Kịch bản tuần 19/11 Ngày Quốc tế Nam giới", "role": "R1", "due": "2026-11-14", "dueTxt": "14/11", "phase": "Giai đoạn 3"}, {"id": "T13", "task": "Review tháng 1: chọn top sản phẩm theo Sub_id, cắt sản phẩm C yếu", "role": "R1", "due": "2026-11-16", "dueTxt": "16/11", "phase": "Giai đoạn 3"}, {"id": "T14", "task": "Kịch bản Black Friday 27/11", "role": "R1", "due": "2026-11-22", "dueTxt": "22/11", "phase": "Giai đoạn 3"}, {"id": "T15", "task": "Kịch bản 12.12 + Noel + tất niên", "role": "R1", "due": "2026-12-03", "dueTxt": "03/12", "phase": "Giai đoạn 4"}, {"id": "T16", "task": "Kế hoạch nội dung Tết 2027: quà Tết cho ba, phủ bạc tóc", "role": "R1", "due": "2026-12-20", "dueTxt": "20/12", "phase": "Giai đoạn 4"}, {"id": "T17", "task": "Review quý: quyết định mở kênh thứ hai cho cùng tệp nam 45+", "role": "R1", "due": "2027-01-10", "dueTxt": "10/01", "phase": "Giai đoạn 4"}], "forecast": {"views": 5000, "ctr": 0.005, "cr": 0.03, "cost": 8000000}, "sources": [], "sourceTypes": ["Video viral", "Kênh tham khảo", "Hook hay", "Ý tưởng", "Sản phẩm bán chạy", "Đối thủ"], "sourceStatuses": ["Mới", "Đã phân tích", "Đã thành kịch bản", "Bỏ qua"]}</script>
+<script>
+(function(){
+const D = JSON.parse(document.getElementById('data').textContent);
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => Math.round(n).toLocaleString('vi-VN');
+const PL = Object.fromEntries(D.pillars.map(c => [c.code, c]));
+const PCODES = D.pillars.map(c => c.code);
+const ROLE = Object.fromEntries(D.roles.map(r => [r.code, r]));
+const P = Object.fromEntries(D.products.map(p => [p.stt, p]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem('chigiang:'+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem('chigiang:'+k, JSON.stringify(v)); }catch(e){} }
+};
+const today = new Date(D.project.today + 'T00:00:00');
+const realToday = new Date(); realToday.setHours(0,0,0,0);
+const now = realToday > today ? realToday : today;
+
+// theme
+const savedTheme = store.get('theme', null);
+if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+$('#themebtn').onclick = () => {
+  const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const nx = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = nx; store.set('theme', nx);
+};
+
+// header
+$('#pname').textContent = D.project.name;
+$('#psub').textContent = D.project.subtitle + ' · ' + D.project.goal;
+const totalVideos = D.weeks.reduce((s,w) => s + 7*w.total, 0);
+const fullCap = D.capacity;
+const headcount = () => D.roles.reduce((s,r) => s + roleCount(r, fullCap), 0);
+function roleCount(r, cap){
+  if (r.cap === 'kb') return Math.ceil(cap.target / cap.kb);
+  if (r.cap === 'dung') return Math.ceil(cap.target / cap.dung);
+  if (r.cap === 'qc') return Math.ceil(cap.target / cap.qc);
+  return parseInt(r.count, 10) || 1;
+}
+const stats = [
+  ['1', 'page, 5 trụ cột nội dung'],
+  [String(D.maxDay), 'video/ngày từ tuần 4'],
+  [fmt(totalVideos), 'video trong 12 tuần'],
+  [String(D.products.length), 'link Shopee, mỗi video 1 Sub_id'],
+  [String(headcount()), 'người khi đủ công suất'],
+  ['19/10', 'tuần 1 bắt đầu'],
+];
+$('#stats').innerHTML = stats.map(s => `<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+
+// tabs
+const TABS = [
+  ['tong','Tổng quan'],['kenh','Kênh & trụ cột'],['lotrinh','Lộ trình'],['nhansu','Nhân sự & phân việc'],
+  ['quytrinh','Quy trình'],['lich','Lịch đăng'],['sanpham','Sản phẩm'],['congviec','Công việc'],
+  ['dubao','Dự báo'],['kpi','KPI & rủi ro'],['nguon','Nguồn content']
+];
+$('#tabbar').innerHTML = TABS.map(t => `<button role="tab" data-t="${t[0]}" aria-selected="false">${t[1]}</button>`).join('');
+$('#main').innerHTML = TABS.map(t => `<section class="tab" id="tab-${t[0]}" role="tabpanel"></section>`).join('');
+function show(id){
+  document.querySelectorAll('nav.tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.t===id));
+  document.querySelectorAll('section.tab').forEach(s => s.classList.toggle('on', s.id==='tab-'+id));
+  store.set('tab', id);
+  if (location.hash !== '#'+id) history.replaceState(null,'','#'+id);
+}
+document.querySelectorAll('nav.tabs button').forEach(b => b.onclick = () => { show(b.dataset.t); window.scrollTo({top: document.querySelector('nav.tabs').offsetTop, behavior:'smooth'}); });
+
+const kdot = code => `<span class="kdot" style="background:var(--${code.toLowerCase()})"></span>`;
+const currentWeek = () => { let cw = null; D.weeks.forEach(w => { if (new Date(w.startIso+'T00:00:00') <= now) cw = w; }); return cw; };
+
+// ---------- Tổng quan
+(function(){
+  const cw = currentWeek();
+  const phaseNow = cw ? (cw.week<=2?1:cw.week<=4?2:cw.week<=6?3:4) : 0;
+  const bars = svgRamp();
+  $('#tab-tong').innerHTML = `
+  <h2>Tổng quan điều hành</h2>
+  <p class="lead">Đang ở <b>${esc(D.phases[phaseNow].phase)}</b>${cw?` – tuần ${cw.week} (${cw.start}–${cw.end})`:''}. Chỉ số chính: <b>${esc(D.project.north_star)}</b>.</p>
+  <div class="alerts">
+    <div class="alert w"><b>Hoa hồng tính theo Shopee, không theo TikTok</b><p>Thực phẩm chức năng trên Shopee thường chỉ 2,5–7,5%. Hoa hồng/đơn cao nhất: ${D.products.slice().sort((a,b)=>b.per_order-a.per_order).slice(0,4).map(p=>esc(p.name)+' ~'+Math.round(p.per_order/1000)+'k').join(', ')}.</p></div>
+    <div class="alert o"><b>Mỗi video một Sub_id</b><p>Link dán ở bình luận có dạng …?sub_id=${esc(D.subPrefix)}-&lt;ID video&gt;-FBReels-SP&lt;mã&gt; (cột I của KHO_KICH_BAN), nên báo cáo Shopee chỉ ra đúng video nào ra đơn.</p></div>
+    <div class="alert"><b>Một page, nội dung nhạy cảm</b><p>Bị hạn chế là mất hết. Không xưng bác sĩ, không hình gợi dục, không hứa “tăng sinh lý”; tăng sản lượng theo bậc, qua cửa mới tăng.</p></div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="margin-top:0">Tệp khán giả</h3>
+      <div class="timeline">${D.channel.audience.map(a => `<div class="t" style="font-size:13px">${esc(a[0])}</div><div class="small">${esc(a[1])}</div>`).join('')}</div>
+      <p class="muted" style="margin-bottom:0">Viết cho đàn ông 45+ ở Sài Gòn và miền Nam: gọi “anh”, “mấy anh”, giọng miền Nam, nhịp chậm.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Video/ngày theo tuần và trụ cột</h3>
+      ${bars}
+      <div class="legend">${D.pillars.map(c => `<span>${kdot(c.code)}${c.code} ${esc(c.name)}</span>`).join('')}</div>
+    </div>
+  </div>
+  <h3>5 giai đoạn</h3>
+  <div class="card">${D.phases.map((p,i) => `<div class="phase"><div><b>${esc(p.phase)}</b><div class="muted">${esc(p.time)}</div>${i===phaseNow?'<span class="pill A" style="margin-top:6px">Đang ở đây</span>':''}</div><div class="small">${esc(p.goal)}</div><div class="gate">${esc(p.gate)}</div></div>`).join('')}</div>
+  <h3>Mỗi ngày của điều phối</h3>
+  <div class="grid g3">
+    <div class="card"><b>Sáng 08:30</b><p class="small">Mở sheet TONG_QUAN: % hoàn thành, đơn theo trụ cột, prompt chờ duyệt, việc quá hạn. Họp nhanh 10 phút.</p></div>
+    <div class="card"><b>Chiều 17:00</b><p class="small">Kiểm tra R4 đã chốt đủ bài cho ngày mai trên Postiz, link kèm Sub_id nằm ở bình luận gốc.</p></div>
+    <div class="card"><b>Chủ nhật 19:00</b><p class="small">Review tuần: top 3 video theo Sub_id → 5 biến thể. Cắt sản phẩm hạng C sau 20 video không có đơn. Chốt 56 ý tưởng cho tuần sau.</p></div>
+  </div>`;
+})();
+
+function svgRamp(){
+  const W = 560, H = 230, pad = {l:30,r:8,t:10,b:34};
+  const iw = W-pad.l-pad.r, ih = H-pad.t-pad.b, max = D.maxDay;
+  const bw = iw / D.weeks.length;
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Biểu đồ sản lượng video mỗi ngày theo tuần">`;
+  [0,.25,.5,.75,1].map(f => Math.round(f*max)).forEach(v => { const y = pad.t + ih - v/max*ih; s += `<line x1="${pad.l}" x2="${W-pad.r}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${pad.l-6}" y="${y+4}" text-anchor="end">${v}</text>`; });
+  D.weeks.forEach((w,i) => {
+    let y = pad.t + ih; const x = pad.l + i*bw + 4;
+    PCODES.forEach(k => { const h = w[k]/max*ih; if(!h) return; y -= h; s += `<rect x="${x}" y="${y}" width="${bw-8}" height="${h}" fill="var(--${k.toLowerCase()})" rx="2"><title>Tuần ${w.week} · ${k} ${esc(PL[k].name)}: ${w[k]} video/ngày</title></rect>`; });
+    const tot = w.total;
+    s += `<text x="${x+(bw-8)/2}" y="${y-4}" text-anchor="middle" style="font-weight:600;fill:var(--ink)">${tot}</text>`;
+    s += `<text x="${x+(bw-8)/2}" y="${H-pad.b+14}" text-anchor="middle">T${w.week}</text><text x="${x+(bw-8)/2}" y="${H-pad.b+27}" text-anchor="middle" style="font-size:9.5px">${w.start}</text>`;
+  });
+  return s + '</svg>';
+}
+
+// ---------- Kênh
+const CHN = D.channel;
+$('#tab-kenh').innerHTML = `<h2>Kênh & 5 trụ cột nội dung</h2>
+<p class="lead">Một page, nội dung chia 5 trụ cột theo nhu cầu của đàn ông 45+. Mỗi trụ cột có nhóm sản phẩm riêng, số video/ngày lấy từ lộ trình.</p>
+<div class="grid g2">
+  <div class="card">
+    <h3 style="margin-top:0">${esc(CHN.name)}</h3>
+    <div class="timeline">
+      <div class="t" style="font-size:13px">Nhân vật</div><div class="small">${esc(CHN.host)}</div>
+      <div class="t" style="font-size:13px">Định dạng</div><div class="small">${esc(CHN.format)}</div>
+      <div class="t" style="font-size:13px">Công cụ</div><div class="small">${esc(CHN.tool)}</div>
+      <div class="t" style="font-size:13px">Trạng thái</div><div class="small">${esc(CHN.status)}</div>
+      <div class="t" style="font-size:13px">Postiz ID</div><div class="small"><code>${esc(CHN.postiz_id)}</code></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Luật giọng nói (áp vào mọi prompt)</h3>
+    <ul style="margin:0;padding-left:18px">${CHN.voice.map(v => `<li class="small" style="margin-bottom:6px">${esc(v)}</li>`).join('')}</ul>
+  </div>
+</div>
+<h3>5 trụ cột</h3>
+<div class="grid g5">${D.pillars.map(c => `
+  <div class="card chcard" style="--c:var(--${c.code.toLowerCase()})">
+    <div><span class="code">${c.code}</span> <span class="muted">· ${D.weeks[D.weeks.length-1][c.code]} video/ngày</span></div>
+    <h4>${esc(c.name)}</h4>
+    <div class="small">${esc(c.desc)}</div>
+    <div class="lbl">Câu hỏi mẫu</div><ul>${c.examples.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+    <div class="lbl">Sản phẩm chủ lực</div>
+    <div class="chips">${c.products.filter(n=>P[n]).map(n => `<span class="chip" title="${esc(P[n].shopee)}">${n}. ${esc(P[n].name)}</span>`).join('') || '<span class="muted small">Chưa có link Shopee</span>'}</div>
+  </div>`).join('')}</div>
+<h3>Ý tưởng khởi đầu (${D.ideas.length} video, đã nạp sẵn vào sheet KHO_KICH_BAN)</h3>
+<div class="filters"><select id="idch"><option value="">Tất cả trụ cột</option>${D.pillars.map(c=>`<option value="${c.code}">${c.code} · ${esc(c.name)}</option>`).join('')}</select>
+<select id="idty"><option value="">Mọi loại video</option>${[...new Set(D.ideas.map(i=>i.type))].map(t=>`<option>${esc(t)}</option>`).join('')}</select></div>
+<div class="tablewrap"><table><thead><tr><th>Trụ cột</th><th>Loại</th><th>Tiêu đề / câu hỏi</th><th>Hook 3 giây</th><th>Bối cảnh</th><th>Sản phẩm</th></tr></thead><tbody id="idbody"></tbody></table></div>`;
+function renderIdeas(){
+  const f = $('#idch').value, t = $('#idty').value;
+  $('#idbody').innerHTML = D.ideas.filter(i => (!f || i.pl===f) && (!t || i.type===t)).map(i => `<tr><td style="white-space:nowrap">${kdot(i.pl)}${i.pl}</td><td><span class="pill">${esc(i.type)}</span></td><td>${esc(i.title)}</td><td class="muted">“${esc(i.hook)}”</td><td class="small">${esc(i.scene)}</td><td class="small">${i.sp&&P[i.sp]?esc(i.sp+'. '+P[i.sp].name):'—'}</td></tr>`).join('');
+}
+$('#idty').onchange = renderIdeas;
+$('#idch').onchange = renderIdeas; renderIdeas();
+
+// ---------- Lộ trình
+(function(){
+  const cw = currentWeek();
+  const cellBg = v => v===0 ? 'background:var(--surface-2);color:var(--ink-3)' : v>=3 ? 'background:var(--ok-bg);color:var(--ok)' : v>=2 ? 'background:var(--warn-bg);color:var(--warn)' : '';
+  $('#tab-lotrinh').innerHTML = `<h2>Lộ trình 12 tuần</h2>
+  <p class="lead">Số trong ô là video/ngày của từng trụ cột. Muốn đổi thì sửa sheet LO_TRINH; THEO_DOI_NGAY và DU_BAO tự cập nhật theo.</p>
+  <div class="tablewrap"><table class="heat"><thead><tr><th>Tuần</th><th>Thời gian</th>${D.pillars.map(c=>`<th class="ctr" title="${esc(c.name)}">${kdot(c.code)}${c.code}</th>`).join('')}<th class="ctr">Tổng/ngày</th><th class="num">Tổng/tuần</th><th>Mốc / sự kiện</th></tr></thead><tbody>
+  ${D.weeks.map(w => { const t = w.total; const on = cw && cw.week===w.week; return `<tr${on?' style="outline:2px solid var(--accent);outline-offset:-2px"':''}><td><b>T${w.week}</b>${on?' <span class="pill A">nay</span>':''}</td><td class="muted" style="white-space:nowrap">${w.start} – ${w.end}</td>${PCODES.map(k=>`<td class="cell" style="${cellBg(w[k])}">${w[k]}</td>`).join('')}<td class="cell"><b>${t}</b></td><td class="num">${fmt(t*7)}</td><td class="small">${esc(w.event)}</td></tr>`; }).join('')}
+  <tr><td colspan="8"><b>Tổng 12 tuần</b></td><td class="num"><b>${fmt(totalVideos)}</b></td><td></td></tr>
+  </tbody></table></div>
+  <p class="muted">${D.pillars.map(c=>c.code+' '+esc(c.name)).join(' · ')}</p>
+  <h3>Điều kiện qua cửa từng giai đoạn</h3>
+  <div class="card">${D.phases.map(p => `<div class="phase"><div><b>${esc(p.phase)}</b><div class="muted">${esc(p.time)}</div></div><div class="small">${esc(p.goal)}</div><div class="gate">${esc(p.gate)}</div></div>`).join('')}</div>`;
+})();
+
+// ---------- Nhân sự
+(function(){
+  $('#tab-nhansu').innerHTML = `<h2>Nhân sự & phân việc</h2>
+  <p class="lead">${D.roles.length} vai trò. Số người của biên kịch, sản xuất video và đăng bài tự tính theo công suất. Đổi các ô dưới đây để thử kịch bản nhân sự.</p>
+  <div class="card">
+    <div class="calc">
+      <label>Video/ngày<input type="number" id="c-target" min="1" value="${fullCap.target}"></label>
+      <label>Prompt/biên kịch/ngày<input type="number" id="c-kb" min="1" value="${fullCap.kb}"></label>
+      <label>Video/người sản xuất/ngày<input type="number" id="c-dung" min="1" value="${fullCap.dung}"></label>
+      <label>Bài/người QC/ngày<input type="number" id="c-qc" min="1" value="${fullCap.qc}"></label>
+      <div><div class="muted">Tổng nhân sự</div><div id="c-total" style="font-size:28px;font-weight:700;color:var(--brand)"></div></div>
+    </div>
+    <div class="muted">Giai đoạn 1 (5–6 video/ngày) chỉ cần 2 người: người 1 kiêm R1 + R2 (chọn chủ đề, viết và duyệt prompt), người 2 kiêm R3 + R4 (Viral Studio, QC, đăng, bình luận, số liệu).</div>
+  </div>
+  <h3>Vai trò</h3>
+  <div class="grid g2" id="roles"></div>
+  <h3>Ma trận trách nhiệm (RACI)</h3>
+  <p class="muted" style="margin-top:-4px">R = làm · A = chịu trách nhiệm cuối · C = tham vấn · I = được báo</p>
+  <div class="tablewrap"><table class="raci"><thead><tr><th>Bước</th>${D.raciRoles.map(r=>`<th class="ctr" title="${esc(ROLE[r].role)}">${r}</th>`).join('')}</tr></thead><tbody>
+  ${D.sop.map(s => `<tr><td>${s.n}. ${esc(s.task)}</td>${D.raciRoles.map(r => { const v = (D.raci[s.n]||{})[r]||''; return `<td class="ctr ${v?'r-'+v:''}">${v}</td>`; }).join('')}</tr>`).join('')}
+  </tbody></table></div>
+  <p class="muted">${D.roles.map(r=>`${r.code} ${esc(r.role)}`).join(' · ')}</p>`;
+  function render(){
+    const cap = { target:+$('#c-target').value||1, kb:+$('#c-kb').value||1, dung:+$('#c-dung').value||1, qc:+$('#c-qc').value||1 };
+    let tot = 0;
+    $('#roles').innerHTML = D.roles.map(r => { const n = roleCount(r, cap); tot += n; return `<div class="card role"><div class="head"><b>${r.code} · ${esc(r.role)}</b><span class="cnt">${n}</span></div><p>${esc(r.duty)}</p><p><b>Đầu ra:</b> ${esc(r.output)}</p><p><b>KPI:</b> ${esc(r.kpi)}</p><p class="muted">Công cụ: ${esc(r.tools)} · Báo cáo cho: ${esc(r.report)}</p></div>`; }).join('');
+    $('#c-total').textContent = tot + ' người';
+  }
+  ['c-target','c-kb','c-dung','c-qc'].forEach(id => $('#'+id).oninput = render); render();
+})();
+
+// ---------- Quy trình
+(function(){
+  const qcState = store.get('qc', {});
+  $('#tab-quytrinh').innerHTML = `<h2>Quy trình một video</h2>
+  <p class="lead">10 bước. Trạng thái video ở sheet KHO_KICH_BAN đi theo: Ý tưởng → Đang viết → Chờ duyệt → Đã duyệt → Đang sản xuất → QC → Sẵn sàng đăng → Đã đăng.</p>
+  <div class="flow">${D.sop.map(s => `<div class="fstep"><span class="n">${s.n}</span><b>${esc(s.task)}</b><div class="who">${s.r} · ${esc(ROLE[s.r]?ROLE[s.r].role:s.r)}</div><div class="muted">${esc(s.when)}</div><p>${esc(s.out)}</p></div>`).join('')}</div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card"><h3 style="margin-top:0">Checklist QC 10 điểm</h3><p class="muted" style="margin-top:-6px">Đạt hết mới được đăng. Tick để thử với một video, bấm “Làm lại” cho video tiếp theo.</p>
+      <div id="qclist"></div><button class="btn" id="qcreset" type="button">Làm lại</button></div>
+    <div class="card"><h3 style="margin-top:0">Nhịp làm việc một ngày</h3>
+      <div class="timeline">${D.rhythm.map(x => `<div class="t">${esc(x.t)}</div><div>${esc(x.task)} <span class="muted">· ${esc(x.who)}${x.note?' · '+esc(x.note):''}</span></div>`).join('')}</div>
+      <h3>Họp định kỳ</h3>
+      <div class="timeline">${D.rituals.map(x => `<div class="t" style="font-size:13px">${esc(x.when)}</div><div>${esc(x.what)} <span class="muted">· ${esc(x.who)}</span></div>`).join('')}</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px"><b>Quy tắc đặt tên file:</b> <code>CG-&lt;YYYYMMDD&gt;-&lt;giờ đăng&gt;-&lt;ID video&gt;-&lt;slug&gt;.mp4</code>, ví dụ <code>CG-20261020-0730-T1-002-review-vuong-bao.mp4</code>, lưu vào <code>viral-studio-downloads/videos/gioi-tinh/</code></div>`;
+  function render(){
+    $('#qclist').innerHTML = D.qc.map((q,i) => `<label class="check ${qcState[i]?'done':''}"><input type="checkbox" data-i="${i}" ${qcState[i]?'checked':''}><span class="t">${i+1}. ${esc(q)}</span></label>`).join('');
+    $('#qclist').querySelectorAll('input').forEach(cb => cb.onchange = () => { qcState[cb.dataset.i] = cb.checked; store.set('qc', qcState); render(); });
+  }
+  $('#qcreset').onclick = () => { Object.keys(qcState).forEach(k => delete qcState[k]); store.set('qc', qcState); render(); };
+  render();
+})();
+
+// ---------- Lịch đăng
+$('#tab-lich').innerHTML = `<h2>Lịch đăng</h2>
+<p class="lead">8 khung giờ theo thói quen lướt Facebook của đàn ông 45+: 2 review, 3 hỏi đáp gắn sản phẩm, 1 tình huống vợ chồng, 2 hỏi đáp kéo view. Tuần 1–3 chưa đủ 8 video thì bỏ khung 13:00 và 22:45 trước.</p>
+<div class="tablewrap"><table><thead><tr><th>Giờ</th><th>Loại video</th><th>Mục tiêu</th><th>Gắn sản phẩm</th></tr></thead><tbody>
+${D.slots.map(s => `<tr><td><b>${s.t}</b></td><td>${esc(s.type)}</td><td class="muted">${esc(s.goal)}</td><td>${esc(s.prod)}</td></tr>`).join('')}</tbody></table></div>
+<div class="grid g2" style="margin-top:14px">
+<div><h3 style="margin-top:0">Chủ đề theo thứ</h3><div class="tablewrap"><table><thead><tr><th>Thứ</th><th>Chủ đề</th><th>Bối cảnh</th><th>Sản phẩm</th></tr></thead><tbody>${D.themes.map(t=>`<tr><td><b>${esc(t.day)}</b></td><td>${esc(t.theme)}</td><td class="muted">${esc(t.color)}</td><td class="small">${esc(t.prod)}</td></tr>`).join('')}</tbody></table></div></div>
+<div><h3 style="margin-top:0">Lịch mùa vụ</h3><div class="tablewrap"><table><thead><tr><th>Khi nào</th><th>Sự kiện</th><th>Hướng nội dung</th></tr></thead><tbody>${D.season.map(t=>`<tr><td><b style="white-space:nowrap">${esc(t.when)}</b></td><td>${esc(t.ev)}</td><td class="small">${esc(t.dir)}</td></tr>`).join('')}</tbody></table></div></div>
+</div>`;
+
+// ---------- Sản phẩm
+(function(){
+  $('#tab-sanpham').innerHTML = `<h2>Sản phẩm affiliate Shopee</h2>
+  <p class="lead">${D.products.length} link Shopee, mỗi link có thư mục ảnh. Tên, giá, hoa hồng lấy đúng theo sản phẩm của link (crawl bằng PostForge). Hạng xếp theo hoa hồng/đơn: A ≥ 20k, B ≥ 10k. Link riêng của từng video (kèm Sub_id) lấy ở cột I của KHO_KICH_BAN.</p>
+  <div class="filters">
+    <input id="pq" type="search" placeholder="Tìm tên sản phẩm…">
+    <select id="pch"><option value="">Tất cả trụ cột</option>${D.pillars.map(c=>`<option value="${c.code}">${c.code} · ${esc(c.name)}</option>`).join('')}</select>
+    <select id="ptier"><option value="">Mọi hạng</option><option>A</option><option>B</option><option>C</option></select>
+    <select id="psort"><option value="stt">Sắp theo mã</option><option value="po">Hoa hồng/đơn cao nhất</option><option value="hh">% hoa hồng cao nhất</option></select>
+  </div>
+  <div class="tablewrap"><table><thead><tr><th>Mã</th><th>Sản phẩm</th><th class="num">Giá</th><th class="num">HH</th><th class="num">HH/đơn</th><th>Trụ cột</th><th>Hạng</th><th>Góc nội dung</th><th>Link</th></tr></thead><tbody id="pbody"></tbody></table></div>
+  <p class="muted" id="pcount"></p>`;
+  function render(){
+    const q = $('#pq').value.trim().toLowerCase(), ch = $('#pch').value, tier = $('#ptier').value, so = $('#psort').value;
+    let rows = D.products.filter(p => (!q || (p.name+' '+p.shopee).toLowerCase().includes(q)) && (!ch || p.ch===ch || p.ch2===ch) && (!tier || p.tier===tier));
+    if (so==='po') rows.sort((a,b)=>b.per_order-a.per_order); else if (so==='hh') rows.sort((a,b)=>b.hh-a.hh);
+    $('#pbody').innerHTML = rows.map(p => {
+      return `<tr><td><b>${p.stt}</b></td><td><b>${esc(p.name)}</b><div class="muted">${esc(p.shopee)}</div>${p.note?`<div class="small" style="color:var(--brand);margin-top:3px">${esc(p.note)}</div>`:''}</td><td class="num">${fmt(p.price)}đ</td><td class="num">${(p.hh*100).toFixed(1)}%</td><td class="num"><b>${fmt(p.per_order)}đ</b></td><td style="white-space:nowrap">${kdot(p.ch)}${p.ch}${p.ch2?' <span class="muted">+'+p.ch2+'</span>':''}</td><td><span class="pill ${p.tier}">${p.tier}</span></td><td class="small">${esc(p.angle)}</td><td style="white-space:nowrap"><a class="btn pri" href="${esc(p.link)}" target="_blank" rel="noopener">Mở link</a> <button class="btn" type="button" data-copy="${esc(p.sublink)}" title="${esc(p.sublink)}">Chép link Sub_id</button> <button class="btn" type="button" data-copy="${esc(p.folder)}" title="${esc(p.folder)}">Thư mục ảnh</button></td></tr>`;
+    }).join('');
+    $('#pcount').textContent = rows.length + ' / ' + D.products.length + ' sản phẩm';
+  }
+  ['pq','pch','ptier','psort'].forEach(id => $('#'+id).addEventListener('input', render));
+  render();
+})();
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  const txt = b.dataset.copy;
+  const done = () => { const o = b.textContent; b.textContent = 'Đã chép'; b.classList.add('copied'); setTimeout(()=>{ b.textContent = o; b.classList.remove('copied'); }, 1300); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => prompt('Chép thủ công:', txt));
+  else prompt('Chép thủ công:', txt);
+});
+
+// ---------- Công việc
+(function(){
+  const st = store.get('tasks', {});
+  $('#tab-congviec').innerHTML = `<h2>Công việc & giao việc</h2>
+  <p class="lead">Việc thiết lập và các mốc lớn. Tick khi xong (lưu trên trình duyệt này). Bản dùng chung cả team: sheet CONG_VIEC trong Excel, có cột “Người làm”.</p>
+  <div class="filters"><select id="trole"><option value="">Tất cả vai trò</option>${D.roles.map(r=>`<option value="${r.code}">${r.code} · ${esc(r.role)}</option>`).join('')}</select>
+  <label class="small" style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="thide"> Ẩn việc đã xong</label></div>
+  <div class="card"><div class="small" id="tprog"></div><div class="progress"><i id="tbar"></i></div><div id="tlist"></div></div>`;
+  function render(){
+    const role = $('#trole').value, hide = $('#thide').checked;
+    const all = D.tasks.filter(t => !role || t.role===role);
+    const done = all.filter(t => st[t.id]).length;
+    $('#tprog').textContent = `${done}/${all.length} việc đã xong`;
+    $('#tbar').style.width = (all.length? done/all.length*100 : 0) + '%';
+    let html = '', ph = '';
+    all.forEach(t => {
+      if (hide && st[t.id]) return;
+      if (t.phase !== ph){ ph = t.phase; html += `<h3 style="margin:14px 0 4px">${esc(ph)}</h3>`; }
+      const od = !st[t.id] && new Date(t.due+'T00:00:00') < now;
+      html += `<label class="check ${st[t.id]?'done':''}"><input type="checkbox" data-id="${t.id}" ${st[t.id]?'checked':''}><span><span class="t"><b>${t.id}</b> · ${esc(t.task)}</span><div class="meta">${t.role} · ${esc(ROLE[t.role].role)} · <span class="${od?'overdue':''}">hạn ${t.dueTxt}${od?' (quá hạn)':''}</span></div></span></label>`;
+    });
+    $('#tlist').innerHTML = html || '<p class="muted">Không có việc.</p>';
+    $('#tlist').querySelectorAll('input').forEach(cb => cb.onchange = () => { st[cb.dataset.id] = cb.checked; store.set('tasks', st); render(); });
+  }
+  $('#trole').onchange = render; $('#thide').onchange = render; render();
+})();
+
+// ---------- Dự báo
+(function(){
+  const A = D.products.filter(p => p.tier==='A');
+  const avgA = A.reduce((s,p)=>s+p.per_order,0)/(A.length||1);
+  $('#tab-dubao').innerHTML = `<h2>Dự báo hoa hồng</h2>
+  <div class="alert" style="margin-bottom:14px"><b>Chỉ tăng người khi view thực tế vượt ngưỡng hòa vốn</b><p>Hoa hồng Shopee của thực phẩm chức năng thấp, nên với giả định mặc định hoa hồng chưa đủ trả lương cả đội. Giai đoạn 1 chạy 2 người kiêm nhiệm, nhập số thật của page vào đây rồi mới quyết định.</p></div>
+  <p class="lead">Các con số mặc định là <b>giả định</b>. Sau 2 tuần, thay bằng số thực của page (view, click, đơn) từ sheet THEO_DOI_NGAY. Hoa hồng trung bình/đơn lấy theo sản phẩm hạng A.</p>
+  <div class="card"><div class="calc">
+    <label>View trung bình/video<input type="number" id="f-v" value="${D.forecast.views}" min="0"></label>
+    <label>Click/view (%)<input type="number" id="f-c" value="${(D.forecast.ctr*100).toFixed(2)}" step="0.1" min="0"></label>
+    <label>Đơn/click (%)<input type="number" id="f-r" value="${(D.forecast.cr*100).toFixed(1)}" step="0.5" min="0"></label>
+    <label>HH TB/đơn (đ)<input type="number" id="f-h" value="${Math.round(avgA)}" step="1000" min="0"></label>
+    <label>Số người<input type="number" id="f-n" value="${headcount()}" min="1"></label>
+    <label>Chi phí/người/tháng (đ)<input type="number" id="f-k" value="${D.forecast.cost}" step="500000" min="0" style="width:140px"></label>
+  </div>
+  <div class="grid g3" id="f-sum"></div>
+  <div id="f-chart" style="margin-top:12px"></div></div>
+  <div class="tablewrap" style="margin-top:14px"><table><thead><tr><th>Tuần</th><th class="num">Video/tuần</th><th class="num">View</th><th class="num">Click</th><th class="num">Đơn</th><th class="num">Hoa hồng dự kiến</th></tr></thead><tbody id="f-body"></tbody></table></div>`;
+  function render(){
+    const v=+$('#f-v').value||0, c=(+$('#f-c').value||0)/100, r=(+$('#f-r').value||0)/100, h=+$('#f-h').value||0;
+    let tot=0, rows='', vals=[];
+    D.weeks.forEach(w => { const vid=7*w.total, views=vid*v, cl=views*c, od=cl*r, hh=od*h; tot+=hh; vals.push(hh);
+      rows += `<tr><td>T${w.week} · ${w.start}</td><td class="num">${fmt(vid)}</td><td class="num">${fmt(views)}</td><td class="num">${fmt(cl)}</td><td class="num">${fmt(od)}</td><td class="num"><b>${fmt(hh)}đ</b></td></tr>`; });
+    $('#f-body').innerHTML = rows;
+    const M = D.maxDay, full = M*30*v*c*r*h, cost = (+$('#f-n').value||0)*(+$('#f-k').value||0), pl = full-cost, be = (c*r*h)>0 ? cost/(M*30*c*r*h) : 0;
+    $('#f-sum').innerHTML = [['Hoa hồng 12 tuần', fmt(tot)+'đ'],['Mỗi tháng khi đủ '+M+' video/ngày', fmt(full)+'đ'],['Đơn/ngày khi đủ công suất', (M*v*c*r).toFixed(1)],['Chi phí nhân sự/tháng', fmt(cost)+'đ'],['Lãi/lỗ mỗi tháng', `<span style="color:${pl<0?'var(--bad)':'var(--ok)'}">${fmt(pl)}đ</span>`],['View TB/video cần để hòa vốn', fmt(be)]].map(x=>`<div class="card" style="background:var(--surface-2);box-shadow:none"><div class="muted">${x[0]}</div><div style="font-size:22px;font-weight:700">${x[1]}</div></div>`).join('');
+    const W=560,H=150,max=Math.max(...vals,1),bw=(W-20)/vals.length;
+    $('#f-chart').innerHTML = `<svg viewBox="0 0 ${W} ${H+20}" width="100%" role="img" aria-label="Hoa hồng dự kiến theo tuần">${vals.map((x,i)=>{const hh=x/max*H;return `<rect x="${10+i*bw+3}" y="${H-hh}" width="${bw-6}" height="${hh}" fill="var(--brand)" rx="2"><title>T${i+1}: ${fmt(x)}đ</title></rect><text x="${10+i*bw+bw/2}" y="${H+14}" text-anchor="middle">T${i+1}</text>`;}).join('')}</svg>`;
+  }
+  ['f-v','f-c','f-r','f-h','f-n','f-k'].forEach(id => $('#'+id).oninput = render); render();
+})();
+
+// ---------- KPI & rủi ro
+$('#tab-kpi').innerHTML = `<h2>KPI & quy tắc cắt / nhân</h2>
+<p class="lead">Áp dụng trong buổi review Chủ nhật. Mỗi tuần lấy 3 video ra đơn nhiều nhất (báo cáo Shopee lọc Sub_id) để làm 5 biến thể cho tuần sau.</p>
+<div class="tablewrap"><table><thead><tr><th>Chỉ số</th><th>Theo dõi ở</th><th>Ngưỡng</th><th>Hành động</th></tr></thead><tbody>${D.kpi.map(k=>`<tr><td><b>${esc(k.m)}</b></td><td class="muted">${esc(k.where)}</td><td><span class="pill">${esc(k.th)}</span></td><td>${esc(k.act)}</td></tr>`).join('')}</tbody></table></div>
+<h3>Sổ rủi ro</h3>
+<div class="tablewrap"><table><thead><tr><th>Rủi ro</th><th>Mức</th><th>Phòng tránh</th><th>Chủ quản</th></tr></thead><tbody>${D.risks.map(r=>`<tr><td>${esc(r.risk)}</td><td><span class="pill ${r.lvl==='Cao'?'bad':r.lvl==='Thấp'?'A':'B'}">${esc(r.lvl)}</span></td><td class="small">${esc(r.fix)}</td><td>${r.owner}</td></tr>`).join('')}</tbody></table></div>`;
+
+// ---------- Tài nguyên
+if(0)$('#tab-tainguyen').innerHTML = `<h2>Tài nguyên & công cụ</h2>
+<p class="lead">Đường dẫn trên máy và skill dùng trong Claude Code. Bấm “Chép” để lấy đường dẫn.</p>
+<div class="tablewrap"><table><thead><tr><th>Tài nguyên</th><th>Đường dẫn / tên</th><th>Dùng để</th><th></th></tr></thead><tbody>${D.resources.map(r=>`<tr><td><b>${esc(r.name)}</b></td><td class="small" style="word-break:break-all"><code>${esc(r.path)}</code></td><td class="muted">${esc(r.use)}</td><td>${r.path.startsWith('http')?`<a class="btn" href="${esc(r.path)}" target="_blank" rel="noopener">Mở</a>`:`<button class="btn" type="button" data-copy="${esc(r.path)}">Chép</button>`}</td></tr>`).join('')}</tbody></table></div>`;
+
+// ---------- Nguồn content
+(function(){
+  let local = store.get('sources', []);
+  const save = () => store.set('sources', local);
+  const APPLY = PCODES.concat(['Tất cả']);
+  const platform = u => { u = (u||'').toLowerCase(); if (u.includes('tiktok')) return 'TikTok'; if (u.includes('facebook') || u.includes('fb.watch') || u.includes('fb.com')) return 'Facebook'; if (u.includes('youtu')) return 'YouTube'; if (u.includes('instagram')) return 'Instagram'; return 'Khác'; };
+  function embed(u){
+    if (!u) return null; let m;
+    if ((m = u.match(/tiktok\.com\/.*?(?:video|v|embed\/v2|photo)\/(\d{8,})/))) return { src:'https://www.tiktok.com/player/v1/'+m[1]+'?description=1&music_info=1&rel=0', cls:'v' };
+    if ((m = u.match(/(?:youtube\.com\/(?:shorts\/|watch\?v=|embed\/|live\/)|youtu\.be\/)([\w-]{6,})/))) return { src:'https://www.youtube.com/embed/'+m[1], cls: u.includes('/shorts/') ? 'v' : 'h' };
+    if ((m = u.match(/instagram\.com\/(?:reel|reels|p)\/([\w-]+)/))) return { src:'https://www.instagram.com/reel/'+m[1]+'/embed', cls:'v' };
+    if (/facebook\.com|fb\.watch|fb\.com/.test(u)) {
+      const post = /\/posts\/|permalink|story_fbid|\/photo|\/share\/p\//.test(u);
+      return { src:'https://www.facebook.com/plugins/'+(post?'post':'video')+'.php?href='+encodeURIComponent(u)+'&show_text=false&width=320', cls: post ? 'post' : 'v' };
+    }
+    return null;
+  }
+  const iframe = e => `<iframe class="${e.cls}" src="${esc(e.src)}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write" referrerpolicy="strict-origin-when-cross-origin" title="Video nguồn"></iframe>`;
+  const shortHint = u => /vt\.tiktok|vm\.tiktok|tiktok\.com\/t\//.test(u) ? 'Link TikTok rút gọn chưa xem trong trang được. Mở link, bấm Chia sẻ → Sao chép liên kết trên máy tính (dạng tiktok.com/@kenh/video/…) rồi dán lại.' : 'Chưa xem trong trang được với link này – bấm “Mở link gốc”.';
+  const stCls = s => s==='Mới' ? 'st-new' : s==='Đã thành kịch bản' ? 'st-done' : '';
+  const opts = (arr, sel) => arr.map(x => `<option${x===sel?' selected':''}>${esc(x)}</option>`).join('');
+
+  $('#tab-nguon').innerHTML = `<h2>Nguồn content mục tiêu</h2>
+  <p class="lead">Kho học hỏi từ Facebook, TikTok, YouTube: video viral, kênh tham khảo, hook hay. Dán link là xem video ngay trong trang. Mỗi thứ Sáu, R1 lọc nguồn “Mới” và chuyển 10 ý tưởng sang sheet KHO_KICH_BAN.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Thêm nguồn mới</h3>
+    <div class="formgrid">
+      <label class="full">Link Facebook / TikTok / YouTube *<input id="s-url" type="url" placeholder="Dán link vào đây, ví dụ https://www.tiktok.com/@kenh/video/123…"></label>
+      <label>Kênh / tác giả<input id="s-author" placeholder="@tenkenh"></label>
+      <label>Loại<select id="s-type">${opts(D.sourceTypes, 'Video viral')}</select></label>
+      <label>Áp dụng cho<select id="s-apply">${opts(APPLY, 'T1')}</select></label>
+      <label>View (nếu biết)<input id="s-views" type="number" min="0" placeholder="vd 1200000"></label>
+      <label class="full">Học được gì (hook, cấu trúc, nhân vật, câu chốt…)<textarea id="s-learned" rows="2"></textarea></label>
+      <label class="full">Ý tưởng chuyển thể cho Chị Giang<textarea id="s-idea" rows="2"></textarea></label>
+    </div>
+    <div id="s-preview" class="src-preview"></div>
+    <button class="btn pri" id="s-add" type="button">Thêm vào danh sách</button> <span class="muted" id="s-msg"></span>
+  </div>
+  <div class="filters" style="margin-top:18px">
+    <input id="sq" type="search" placeholder="Tìm trong ghi chú, tác giả…">
+    <select id="splat"><option value="">Mọi nền tảng</option>${opts(['TikTok','Facebook','YouTube','Instagram','Khác'])}</select>
+    <select id="sapply"><option value="">Mọi trụ cột</option>${opts(APPLY)}</select>
+    <select id="sstat"><option value="">Mọi trạng thái</option>${opts(D.sourceStatuses)}</select>
+  </div>
+  <div class="src-actions" style="margin-bottom:12px">
+    <button class="btn" id="s-copy" type="button">Chép mục mới để gửi Claude</button>
+    <button class="btn" id="s-export" type="button">Xuất file .json</button>
+    <label class="btn" style="cursor:pointer">Nhập file .json<input id="s-import" type="file" accept=".json,application/json" hidden></label>
+    <span class="muted small" id="s-count"></span>
+  </div>
+  <div class="srcgrid" id="s-list"></div>
+  <p class="muted small" style="margin-top:14px">Mục thêm ở đây chỉ lưu trên trình duyệt của máy này. Muốn cả team thấy: bấm “Chép mục mới để gửi Claude” rồi dán vào chat, Claude sẽ lưu vào file gốc (_build/nguon-content.json) và làm mới trang này. Có thể ghi thêm vào sheet NGUON_CONTENT trong Excel.</p>`;
+
+  function all(){ return local.map(s => ({...s, _local:true})).concat(D.sources); }
+  function render(){
+    const q = $('#sq').value.trim().toLowerCase(), pf = $('#splat').value, ap = $('#sapply').value, st = $('#sstat').value;
+    const rows = all().filter(s => (!q || [s.author,s.learned,s.idea,s.url].join(' ').toLowerCase().includes(q)) && (!pf || platform(s.url)===pf) && (!ap || s.apply===ap) && (!st || s.status===st));
+    $('#s-count').textContent = `${D.sources.length} nguồn trong file · ${local.length} nguồn thêm trên máy này · đang hiện ${rows.length}`;
+    $('#s-list').innerHTML = rows.map(s => {
+      const p = platform(s.url), e = embed(s.url);
+      return `<div class="card src">
+        <div class="src-head"><span class="pill plat-${p}">${p}</span><b>${esc(s.author||'')}</b><span class="muted small">${esc(s.id||'')} · ${esc(s.added||'')}${s.views?` · ${fmt(s.views)} view`:''}</span>${s._local?'<span class="tag-local">mới thêm trên máy này</span>':''}</div>
+        <div class="src-media">${e ? `<button class="playbtn" type="button" data-play="${esc(s.url)}">▶ Xem tại đây</button>` : `<div class="hint">${esc(shortHint(s.url))}</div>`}</div>
+        <div class="chips"><span class="pill">${esc(s.type||'')}</span><span class="pill">${esc(s.apply||'')}</span><span class="pill ${stCls(s.status)}">${esc(s.status||'Mới')}</span></div>
+        ${s.learned?`<p><b>Học được:</b> ${esc(s.learned)}</p>`:''}
+        ${s.idea?`<p><b>Ý tưởng:</b> ${esc(s.idea)}</p>`:''}
+        <div class="src-actions"><a class="btn" href="${esc(s.url)}" target="_blank" rel="noopener">Mở link gốc</a><button class="btn" type="button" data-copy="${esc(s.url)}">Chép link</button>
+        ${s._local?`<select data-st="${esc(s.id)}">${opts(D.sourceStatuses, s.status)}</select><button class="btn" type="button" data-del="${esc(s.id)}">Xóa</button>`:''}</div>
+      </div>`;
+    }).join('') || '<p class="muted">Chưa có nguồn nào khớp bộ lọc.</p>';
+  }
+  $('#s-list').addEventListener('click', ev => {
+    const pb = ev.target.closest('[data-play]');
+    if (pb) { const e = embed(pb.dataset.play); pb.parentElement.innerHTML = iframe(e); return; }
+    const del = ev.target.closest('[data-del]');
+    if (del && confirm('Xóa nguồn này khỏi máy này?')) { local = local.filter(s => s.id !== del.dataset.del); save(); render(); }
+  });
+  $('#s-list').addEventListener('change', ev => {
+    const sel = ev.target.closest('[data-st]'); if (!sel) return;
+    const it = local.find(s => s.id === sel.dataset.st); if (it) { it.status = sel.value; save(); render(); }
+  });
+  let tmr;
+  $('#s-url').addEventListener('input', () => {
+    clearTimeout(tmr);
+    tmr = setTimeout(() => {
+      const u = $('#s-url').value.trim(), e = embed(u);
+      $('#s-preview').innerHTML = !u ? '' : e ? `<div class="muted small" style="margin-bottom:6px">Xem trước · ${platform(u)}</div><div class="src-media">${iframe(e)}</div>` : `<div class="src-media"><div class="hint">${esc(shortHint(u))}</div></div>`;
+      const m = u.match(/tiktok\.com\/@([\w.\-]+)/); if (m && !$('#s-author').value) $('#s-author').value = '@'+m[1];
+    }, 350);
+  });
+  $('#s-add').onclick = () => {
+    const u = $('#s-url').value.trim();
+    if (!/^https?:\/\//i.test(u)) { $('#s-msg').textContent = 'Cần dán một link bắt đầu bằng http.'; return; }
+    if (all().some(s => s.url === u)) { $('#s-msg').textContent = 'Link này đã có trong danh sách.'; return; }
+    const d = new Date();
+    local.unshift({ id:'M'+d.getTime().toString(36).slice(-5).toUpperCase(), added:d.toISOString().slice(0,10), url:u,
+      author:$('#s-author').value.trim(), type:$('#s-type').value, apply:$('#s-apply').value, views:+$('#s-views').value||null,
+      learned:$('#s-learned').value.trim(), idea:$('#s-idea').value.trim(), status:'Mới', by:'' });
+    save();
+    ['s-url','s-author','s-views','s-learned','s-idea'].forEach(id => $('#'+id).value = '');
+    $('#s-preview').innerHTML = ''; $('#s-msg').textContent = 'Đã thêm.'; setTimeout(() => $('#s-msg').textContent = '', 1500);
+    render();
+  };
+  $('#s-copy').onclick = ev => {
+    if (!local.length) { alert('Chưa có mục nào thêm trên máy này.'); return; }
+    const txt = 'Thêm các nguồn content sau vào nguon-content.json:\n' + JSON.stringify(local, null, 1);
+    const b = ev.currentTarget;
+    const done = () => { const o = b.textContent; b.textContent = 'Đã chép – dán vào chat với Claude'; setTimeout(() => b.textContent = o, 2000); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => prompt('Chép thủ công:', txt)); else prompt('Chép thủ công:', txt);
+  };
+  $('#s-export').onclick = () => {
+    const blob = new Blob([JSON.stringify(all().map(({_local, ...s}) => s), null, 2)], {type:'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'nguon-content-' + new Date().toISOString().slice(0,10) + '.json';
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  };
+  $('#s-import').onchange = ev => {
+    const f = ev.target.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => {
+      try {
+        const arr = JSON.parse(rd.result); const known = new Set(all().map(s => s.url)); let n = 0;
+        (Array.isArray(arr) ? arr : []).forEach(s => { if (s && s.url && !known.has(s.url)) { local.push({ status:'Mới', ...s, id: s.id || ('M'+(Date.now()+n).toString(36).slice(-5).toUpperCase()) }); known.add(s.url); n++; } });
+        save(); render(); alert('Đã nhập ' + n + ' nguồn mới.');
+      } catch (e) { alert('File không đúng định dạng .json'); }
+      ev.target.value = '';
+    };
+    rd.readAsText(f);
+  };
+  ['sq','splat','sapply','sstat'].forEach(id => $('#'+id).addEventListener('input', render));
+  render();
+})();
+
+const start = (location.hash||'').slice(1) || store.get('tab','tong');
+show(TABS.some(t=>t[0]===start) ? start : 'tong');
+})();
+</script>
+</body>
+</html>

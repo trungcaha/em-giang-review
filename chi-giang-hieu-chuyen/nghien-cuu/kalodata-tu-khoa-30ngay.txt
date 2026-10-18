@@ -1,0 +1,180 @@
+=== tiền liệt tuyến
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1733515800022582906",[MUA 2 ĐƯỢC 3] 2 lọ Vương Bảo 80 viên tặng 1 hộ…,123742883.58,95,10,18355888.66,1302556.67
+  "1730109150328818298","1 Hộp Vương Bảo - Hỗ trợ cải thiện tiểu đêm, ti…",99076213.19,507,10,90601757.01,195416.59
+  "1732105751941974650",[MUA 1 TẶNG 1] Vương Bảo 80 viên - Hỗ trợ người…,94057566.96,240,10,48219198.13,391906.53
+  "1731781005041632689",Myali Combo 03 Hộp 20 Viên Myali Biotic Hỗ trợ …,51663486.67,64,7,0,807241.98
+  "1732085306800506289",MYALI BIOTIC Thực phẩm viên uống men vi sinh vù…,42952068.95,163,7,10192929.5,263509.63
+  "1731781002303473073",Myali Combo 02 Hộp Men Vi Sinh Vùng Kín Myali B…,30044558.28,59,7,3535890.91,509229.8
+  "1732983349516207747","Chàm mèo & Bồ quân hỗ trợ tuyến tiền liệt , bàn…",20572156.14,127,10,3057787.2,161985.48
+  "1736911175139951923",Gel Tuyến Tiền Liệt Nam Giới ALICEVA Prostate G…,9638918.64,255,16,8751015.2,37799.68
+=== sinh lý nam
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1736675427694118472","Dép sandal nam nữ Kateco, Dép quai hậu nữ chất …",2578043083.31,20280,8,2105422996.51,127122.44
+  "1731862507453057708","Con Heo Điện Tử, Cỡ Lớn (1 Cái), Bảo Vệ Mật Khẩ…",1367150379.4,8150,10,501093.05,167748.51
+  "1731144297519023757",Nước muối sinh lý Fysoline Isotonic hộp Hồng 40…,1084826396.89,5647,10,905263650.86,192106.68
+  "1729580851241060834",[Mua 3 tặng 1 ] LiveSpo Navax Kids - Nhỏ nước m…,1059713030.07,4175,20,438572102.45,253823.48
+  "1729698184033634529",Combo Nam Tính Rhys Man - Sữa tắm gội nam 3in1 …,975861679.03,2413,10,539228125.2,404418.43
+  "1735297739204167627",Vợt Pickleball Kamito Alpha 2 x Lý Hoàng Nam tr…,934695351.99,308,5,675147856.27,3034725.17
+  "1729439874934541072",Bọt vệ sinh nam giới Oniiz - Dung dịch vệ sinh …,930251861.41,7214,13,797850910.19,128950.91
+  "1729570586004916706",Nước muối sinh lý vàng cho bé sơ sinh LiveSpo N…,794135498.19,7943,20,630021623.94,99979.29
+=== bổ thận
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1734924639764579412",TPBVSK Viên Bổ Thận DSD Sâm Nhung Bổ Thận hỗ tr…,1647015359.62,5460,10,1113011022.74,301651.16
+  "1731023006974708502","Viên Thận BOTAMAX - Hỗ trợ bổ thận, cải thiện c…",312892021.88,862,12,264478047.4,362983.78
+  "1729864477626108259","Combo Trà mát Gan, Bổ Thận: Huy Nùng",266985215.03,1137,0,266985215.03,234815.49
+  "1731789720606837568",Thasucavn Extra - Hỗ trợ Bổ Thận ( 1 HỘP / 150 …,247891524.75,336,5,34932044.77,737772.4
+  "1729773054667360837","THASUCAVN EXTRA 150 viên - Hỗ Trợ Bổ Thận, Cải …",182282533.46,247,5,23505946.52,737985.97
+  "1731862834598609998",Sâm Nhung Bổ Thận TW (Mẫu Vỏ Mới) (HSD T4/2029)…,133452021.19,1195,8,133229359.69,111675.33
+  "1737442251741955452",CAO TINH CHẤT SÂM NHUNG BỔ THẬN LLL ĐÔNG TRÙNG …,128275536.49,484,9,120515407.33,265032.1
+  "1729745716657949661",Viên Bổ Thận Duong Thầy Khiêm 300gam,123699893.83,290,10,2553314.86,426551.36
+=== gel bôi trơn
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1736360214432679841","Bao cao su siêu mỏng 001 OiO kéo dài thời gian,…",27377756.92,221,0,27377756.92,123881.25
+  "1736362821401609319",Bao cao su Feelex Cup dạng cốc độc lạ siêu mỏng…,15443354.1,96,0,15443354.1,160868.27
+  "1736769401457378407","Bao cao su hộp 3 chiếc Feelex siêu mỏng, gân ga…",9165825.6,97,0,9165825.6,94493.05
+  "1736367298744715169","Bao cao su gai siêu mỏng OiO kéo dài thời gian,…",7531716.6,60,0,7531716.6,125528.61
+  "1736686976563905626",BCS X-PRO Ultra Sensitive Bao Cao Su Latex Tự N…,7197057.42,56,0,0,128518.88
+  "1736575719632504738","Bao cao su cao cấp Feelex Performance, siêu mỏn…",7101157.21,26,0,0,273121.43
+  "1736636559476753584",Gel Bôi Trơn PlayAh/HA cung cấp độ ẩm/Warm Lub …,6991768.36,49,0,0,142689.15
+  "1737064367150302922",bao cao su SLM siêu mỏng size 49mm ôm sát không…,6764483.08,23,0,0,294107.96
+=== bao cao su
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1730081145920457549","Hộp 100 chiếc găng tay đen không bột , bao tay …",687493418.32,10124,6,613626461.16,67907.29
+  "1735446622514546226",[500G-2Kg MÀU XANH] Găng tay Cao Su Latex - Bao…,114758063.79,1906,5,84006384.59,60208.85
+  "1736767664736994407",Bao cao su Hộp 30 chiếc Feelex Superthin siêu m…,93963895.93,411,0,93963895.93,228622.62
+  "1736476559039170466",Bao cao su truyền nhiệt Feelex Passionate Facto…,55706143.21,236,0,55706143.21,236042.98
+  "1736542697771730850",Bao cao su siêu mỏng Hộp 30 chiếc Feelex Supert…,36269988.49,113,0,36269988.49,320973.35
+  "1731440526457932425","Găng Tay Cao su ,Bao tay cao su Y Tế Latex Dài …",32622410.44,517,13,6018574.83,63099.44
+  "1737241101642990987","[0,5KG - 1KG - 2KG] Màu Nâu Nhạt - Găng Tay Cao…",32435027.71,542,14,358571.99,59843.22
+  "1736360214432679841","Bao cao su siêu mỏng 001 OiO kéo dài thời gian,…",27377756.92,221,0,27377756.92,123881.25
+=== hàu
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1732694827750491603",COMBO 5 Quần Lót Nam SeamOne Boxer Massage Hàu …,502264249.85,992,12,379755881.25,506314.77
+  "1729678563121990157",Viên uống Hàu Tươi Orihiro Bổ Sung Kẽm Cho Nam …,141126236.55,271,5,33867845.37,520761.02
+  "1730552110958086250",Viên uống Hàu lùn Plus bổ sung kẽm cho nam giới…,138263673.78,340,4,59901757.14,406657.86
+  "1735834777321309928",Hàu lùn Oyster Plus 60 viên bổ sung sức khoẻ na…,79389106.89,191,5,4164985.94,415649.77
+  "1735580273261381300",[HỘP 30V] Viên Uống Sâm Alipas Ecogreen Hỗ Trợ …,78505784.62,70,8,8970215.33,1121511.21
+  "1730486312791673019",[LiH] Combo 3 Chai Dầu Hào Nestlé MAGGI công th…,61232662.85,349,7,4453532.71,175451.76
+  "1730896890880887248","Bếp nướng không khói gas, lò nướng khí GREENFIR…",59439693.91,61,3,50313649.2,974421.21
+  "1730486294003419323",[LiH] Combo 2 Chai Dầu Hào Nestlé MAGGI công th…,52272546.37,347,7,14695799.92,150641.34
+=== mãn kinh
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1732207365338596904",ULucky TD01 Thắt lưng massage chườm nóng | Điều…,5844938782.3,3856,8,5324223404.02,1515803.63
+  "1731838192674112598",[OFFICIAL] COMBO KINH ĐIỂN 4 Hộp Mặt Nạ COLORKE…,4650765915.62,10212,0,4224182526.69,455421.65
+  "1736671104308250279","Paisen hình mực nướng giòn -combo vị bò, cay tê…",2421071876.27,66234,10,2376150650.44,36553.31
+  "1736875198270441237",[VOUCHER 40K] [KOL LIVESTREAM] Hộp Bánh Trung T…,2064216079.17,4649,12,1093330590.22,444012.92
+  "1731702538563390332","TAIKANG Giảm ngứa da dị ứng, viêm da thần kinh,…",1559367345.02,25055,11,1551544359.23,62237.77
+  "1730209836785371549","Quạt Kẹp HUTA Q22 Đường Kinh 20cm, Đồng Hồ …",1105732852.01,4746,11,139312622.28,232982.06
+  "1731875197263448101","1kg Hành Ta Phi  Loại 1 Chính  Hãng  , Chuẩn Hà…",1005090893.76,5507,2,85712352.11,182511.51
+  "1730190988270471865",Dầu cá Omega-3 Triple Strength Webber Naturals …,818072193.33,742,3,305075350.53,1102523.17
+=== phủ bạc
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1734512215880205741",Dầu gội phủ bạc Nezha 400ml chính hãng. Thuốc n…,7021535765.33,36605,12,3889629226.06,191819.03
+  "1732034868953515437",Dầu gội phủ bạc Nezha 400ml chính hãng. Thuốc n…,2990927142.26,36519,12,2672781210.02,81900.58
+  "1733008540881421805",[LẺ ÁO và CẢ BỘ] Quần Áo Ép Cân Ký Nam Nữ SUNO …,770232997.26,2582,10,632036282.76,298308.67
+  "1732842475135993286",Combo 2 Tuýp Tiết Kiệm Kem Nhuộm Tóc Phủ Bạc Th…,677775795.05,2919,8,545713751.43,232194.52
+  "1735483849870771629",[ĐỘC QUYỀN LIVE] Dầu gội phủ bạc Nezha 400ml ch…,646968189.11,8219,5,36050190.07,78716.17
+  "1736385552019064143","Bút Phủ Bạc Tóc KOROLO- Che Tóc Bạc Tức Thì, Dặ…",564292881.03,3498,15,558321375.52,161318.72
+  "1736109384707114037",Lược Nhuộm Bunchar 300ML Chính Hãng – Phủ Bạc H…,500263758.55,4782,8,386186549.97,104613.92
+  "1731185115302233542",Kem Nhuộm Tóc Phủ Bạc Thảo Dược Dạng Lược Crown…,498139269.57,3572,0,403963482.6,139456.68
+=== huyết áp
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1729980874950609442",(Dòng mới 2026) Máy Đo Huyết Áp Bluetooth OMRON…,671475356.88,589,8,455867061.92,1140026.07
+  "1732134158128679606",Máy Đo Huyết Áp Bắp Tay Tự Động Chính Hãng AICA…,643800447.17,1598,7,545152652.72,402878.88
+  "1737506036341769914",[ ĐANG XẢ ]Đồng hồ thông minh S12 MA Chip thế h…,568283666.3,2187,0,35950444.55,259846.21
+  "1730624045273615291",Máy đo Huyết Áp và Nhịp Tim tại nhà có giọng nó…,312063362.88,1100,5,300140222.74,283693.97
+  "1730122439689538082",(Dòng mới 2026 - Kèm Adapter) Máy Đo Huyết Áp O…,263086518.28,190,8,75988666.21,1384665.89
+  "1731354710968207489","Máy Đo Huyết Áp Đeo Cổ Tay LED, Dễ Dàng Sử Dụng…",198096036.99,1509,3,195738108.86,131276.37
+  "1730122401568623138",(Dòng mới 2026) Máy Đo Huyết Áp Bluetooth Phát …,161145065.49,79,8,73482872.67,2039810.96
+  "1731627243945364474",( Chính Hãng ) Máy Đo Huyết Áp Tại Nhà Giọng Đọ…,149612812.97,1302,8,90268413.03,114909.99
+=== tiểu đường
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1736910749801809084",Sữa bột Vinamilk Sure Diecerna mẫu mới cho ngườ…,474722393.69,674,3,261553786.23,704335.9
+  "1729777317677730027",Sữa bột Dành cho người tiểu đường Vinamilk Sure…,388296409.98,588,0,73938973.42,660368.04
+  "1735642445576832543",Đồng Hồ Thông Minh HUAWEI WATCH FIT 5 Pro Chính…,371866933.92,70,0,37179488.76,5312384.77
+  "1735921077962311497",SỮA BỘT ABBOTT GLUCERNA DÀNH CHO NGƯỜI TIỂU ĐƯỜ…,356130376.45,320,2,52465239.91,1112907.43
+  "1736482122418980508",Glucerna Úc Sữa Bột Dinh Dưỡng Cho Người Tiểu Đ…,320212119.65,545,2,21739969.61,587545.17
+  "1730664578134018798",Viên uống dây thìa canh Diabetna Ích Nhân dành …,295143990.97,891,10,104580261.68,331250.27
+  "1734316940083954887",Gạo Basmati Ấn Độ 25kg Hạt Dài Tơi Xốp Cho Ngườ…,222388902.09,275,7,62219589.84,808686.92
+  "1733106460465202915",Sữa Bột Tiểu Đường VARNA DIABETES (Lon 850gr ) …,149682620.05,202,5,81464257.66,741003.07
+=== xương khớp
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1730051297069402211",Viên uống Khương Thảo Đan Gold - Hỗ Trợ Bệnh Lý…,2988826451.3,11034,1,2976904117.65,270874.25
+  "1733510989351651241",[P1](HÀNG CHÍNH HÃNG) Gel Massage - Phục Thể An…,1205703212.68,11129,15,953821980.43,108338.86
+  "1733031559526778644",(SỮA XƯƠNG KHỚP) TPBS Thùng 24 hộp 180ml Nutifo…,1187009435.04,3231,5,996763665.36,367381.44
+  "1733032093096445716",CB2 SỮA XƯƠNG KHỚP 2 THÙNG SỮA CANXI TPBS Combo…,1059029332.55,1441,5,583528018.21,734926.67
+  "1735269247805195392",Combo 2 Thùng 12 Hộp Sữa Tươi Công Thức Varna L…,1004129340.08,1646,8,291007083.72,610042.13
+  "1731405919813796992",Thùng 12 Hộp Sữa tươi công thức Varna Life - Hỗ…,829773010.01,2865,8,805725076.57,289624.09
+  "1731983433032041762",Ngũ Cốc Canxi Sing Việt x2 Canxi Tốt Cho Xương …,540137762.85,5093,9,533161391.21,106054.93
+  "1732373067832722585",VIÊN UỐNG HỖ TRỢ ĐAU NHỨC XƯƠNG KHỚP - THIÊN MA…,513785266.29,5070,13,220017064.94,101338.32
+=== mất ngủ
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1735794736267888018",Miếng Dán Thảo Dược Truyền Thống Cho Chân Giảm …,447984358.1,6383,14,447137994,70183.98
+  "1734031270246778010","Tai nghe ngủ nhét tai không dây MINISO MS217, h…",424305083.43,1607,10,302848440.06,264035.52
+  "1737405602536588560",Miếng Dán Thảo Dược Truyền Thống Cho Chân Giảm …,382543732.85,5320,10,256547045.73,71906.72
+  "1731259088354772922",HITOKI Chip Chắn Sóng Điện Từ Cho Điện Thoại Sm…,280405708.71,3311,11,209914818.48,84689.13
+  "1736755756566807955",Miếng Dán Thảo Dược Truyền Thống Cho Chân Giảm …,276604635.12,3942,14,265186296.35,70168.6
+  "1731452308460243387","SÂM TỐ NỮ Alpha Gold.Hỗ trợ giảm bốc hoả, mất n…",155136314.44,519,3,83420017.94,298913.9
+  "1729706313065663325",Trà tâm sen 5 vị chính hãng (tim sen) cải thiện…,108367728.88,770,8,104190814.44,140737.31
+  "1736201880440505715",Dưỡng não GINKGO BILOBA [Nhập khẩu Mỹ] Hỗ trợ g…,101116534.45,185,8,0,546575.86
+=== kéo dài
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1732198603327047253",Tinh chất Peptide keo ong hỗ trợ phục hồi dưỡng…,1194983969.96,6723,8,1151373457.58,177745.64
+  "1734981159726647029",【SUNO】Viên Sủi Dưỡng Hoa Cắt Cành Giúp Hoa Tươi…,1063840292.01,26252,15,981060811.21,40524.16
+  "1734136370089068175",Áo Khoác Nữ Bomber Cổ Bẻ Khoá Kéo Tay Dài Hai L…,845607717.67,4021,10,350215533.39,210297.87
+  "1733344670646109920",Phích cắm Dây nguồn kéo dài 3 mét camera,676002238.92,8284,9,1000221.79,81603.36
+  "1737474608381855277",Set Áo Cổ Đứng Kèm Quần Dài ECOCHIC B283 Áo Nỉ …,664621463.23,629,1,217219724.07,1056631.9
+  "1731899904263357661","【Thai Smile】Kem Đánh Răng Làm Trắng, Loại Bỏ Vế…",408715123.82,5731,11,406358564.71,71316.55
+  "1732449229457229357",Set Bộ Khoá Kéo Hai Chiều ECOCHIC Áo Khoá Kéo 2…,395369945.33,439,10,20516864.91,900614.91
+  "1731146140120287289",Áo Nỉ Hoodie Khoá Kéo Nam Nữ Dài Tay - Menswear…,393511519.55,6243,9,385973199.24,63032.44
+=== quần lót nam
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1730119271554779144","[Underwear] Combo quần lót nam, quần boxer nam …",2914625012.83,20611,6,2782162840.77,141411.14
+  "1729419258302335423","Combo 3 Quần lót nam Trunk Bamboo co giãn, thấm…",1449034180.24,6464,8,899237434.7,224169.89
+  "1730247668162267836",Hộp 4 Quần Sịp Nam Nanjiren /NTA Underwear Chín…,1357797104.88,10227,10,1095526635.84,132765.92
+  "1729758482076437177",Quần sịp nam thun lạnh combo 4 quần lót nam co …,1328494577.3,9067,5,1210614317.42,146519.75
+  "1735185530160776640","[Underwear] Combo quần lót nam, quần boxer nam …",1023301586.62,10082,9,924600550.42,101497.88
+  "1731130500335897412",Combo 4 quần lót nam boxer NTA Lụa băng cao cấp…,932797724.94,6850,8,792206312.41,136174.85
+  "1730119118155253768","[Underwear] Combo quần lót nam, quần sịp tam gi…",899357237.07,6649,6,772805951.6,135262.03
+  "1735859771620361663",[MUA 3 TẶNG 1] Combo 3 Quần Lót Nam Trunk Excoo…,878401219.82,2478,8,578164883.71,354479.91
+=== đông trùng
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1729822072007396113",[ 2 Hộp ] Cà Phê Laura Nhật Kim Anh Linh Chi & …,1468753064.7,10426,6,1005244027.88,140874.07
+  "1732780016159720835",Laura Coffee Combo 2 Hộp Mix Vị Nấm Linh Chi & …,1324313764.31,9355,3,1140364907.31,141562.13
+  "1729730189617367399",[ COMBO 20 LỌ ] FitNest Yến Chưng ĐÔNG TRÙNG HẠ…,1183494058.39,3236,5,378804702.96,365727.46
+  "1737113153720518079",(Hàng Chính Hãng) Mát Gan Chính Hãng  Đông Trùn…,979126995.96,364,0,0,2689909.33
+  "1735054979950412812","[SIÊU RẺ KO QUÀ] 10 Hộp 2 Vị Laura Coffee, 5 hộ…",919166065.18,1349,6,118863372.74,681368.47
+  "1732624895046813531",[TẶNG BÌNH 50K + 10 GÓI] Mua Hộp 30 Gói Trà Đôn…,688258723.57,4687,10,610583208.01,146844.19
+  "1730594171317685009",[ ƯU ĐÃI 6 HỘP 2 VỊ KHÔNG KÈM QUÀ ] Cà Phê Laur…,668739187.27,1629,6,171604861.37,410521.29
+  "1733630650190038801",Bình Ly + 2 Hộp gồm 1 đông trùng + 1 linh chi C…,503559684.47,2241,6,289843592.01,224703.12
+=== vệ sinh nam
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1729958693491935262",DSDPHARMA Kẽm DSD 30 Ngày 60 Ngày Bổ Sung Kẽm 1…,4013892658.46,22245,10,3729492380.52,180440.22
+  "1731777598249207568",Bọt vệ sinh nam giới Oniiz Plus - Dung dịch Mas…,1350965169.11,8690,6,1224342472.45,155462.04
+  "1730565283747235870",[MUA 3 GIẢM 30% - MUA 4 GIẢM 50%] Bọt vệ sinh n…,1288684486.93,16872,10,966427596.65,76380.07
+  "1732131340881463059",[TẶNG TÚI+THIỆP] Hộp Quà Tự Tin IROMAN Tắm Gội …,1174979768.18,3231,8,1174979768.18,363658.24
+  "1729698184033634529",Combo Nam Tính Rhys Man - Sữa tắm gội nam 3in1 …,975861679.03,2413,10,539228125.2,404418.43
+  "1729439874934541072",Bọt vệ sinh nam giới Oniiz - Dung dịch vệ sinh …,930251861.41,7214,13,797850910.19,128950.91
+  "1735772823952328464",Bọt Vệ Sinh Nam Giới Oniiz Minisize 55ml - Dung…,701341322.52,8757,13,685731153.99,80089.22
+  "1731164012721177698",(MUA 2 TẶNG 1) Combo Sạch Sẽ Kingsman - 2 Sữa t…,590722224.73,3971,13,581941990.86,148759.06
+=== máy massage
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1733743360817465052",【Phiên Bản Mới 2026】Gối Massage Hồng Ngoại 20 B…,4300365665.76,11457,9,4232446844.05,375348.32
+  "1731490194868374499",Máy massage cầm tay NEXPRO loại 5 đầu cảm biến …,1585138499.86,6839,11,1117891333.43,231779.28
+  "1732206637810156854",[10.10] Máy massage cầm tay di động UHUB M1 AIR…,1507247197.85,1243,6,1246188604.38,1212588.25
+  "1736844236976785252","[ Phiên Bản Mới] Gối Massage Cổ Vai Gáy, Máy Ma…",1453081288.88,6789,12,85033346.9,214034.66
+  "1729622653969860827",Máy Massage Bụng. Mát xa phù hợp bụng cổ vai gá…,1062150770.33,2847,9,215618095.08,373077.19
+  "1731479576293967959",Gối Máy Massage Thư Giãn không dây Bomidi MP1 P…,655823550.16,1105,7,454976178.63,593505.48
+  "1736387097448122339","Cáp sạc cho máy massage , máy cạo râu mini NEXP…",535122075.32,1707,10,0,313486.86
+  "1732828422502974970","MÁY MASSAGE 20 ĐẦU CẦM TAY, MASSAGE TOÀN THÂN T…",501690080.76,799,12,164617403.68,627897.47
+=== nội tiết
+products[8]{product_id,product_name,revenue,sales_volumn,commission_rate,video_revenue,unit_price}:
+  "1732414808748754189",[Tặng Thêm 1 Hộp Collagen Vàng] Combo 3 Hộp Nám…,1586333364.17,483,8,19630810.75,3284334.09
+  "1729640112033204921",Viên uống Manhae Menopause Nutrisante - Bổ sung…,782840514.94,499,3,121234160.48,1568818.67
+  "1736930641624073894",Nghệ Nếp ta ngâm Mật Ong Lên Men Đẹp Da Tốt Cho…,759764625.94,3700,2,203099.93,205341.79
+  "1729621467653508056",Viên Uống Đẹp Da Sắc Ngọc Khang ++ [120 Viên] C…,707012705.54,649,0,369588702.67,1089387.84
+  "1731250063688107186","Gel Klenadap Giảm Mụn Nội Tiết, Mụn Trứng Cá Hi…",519093471.39,2857,7,433522282,181691.8
+  "1733356913554065129","SẮC NGỌC NỮ HỔ TRỢ NÁM DA,SẠM DA,CÂN BẰNG NỘI T…",470507938.55,1246,5,304453731.44,377614.72
+  "1734955901548594946","Trà Mâm Xôi ,sâm tố nữ ,trinh nữ hoàng cung ,cỏ…",438787541.59,4558,9,420385371.4,96267.56
+  "1737709610895115533",[Tặng 1 Hộp Nội Tiết Collagen Vàng] Combo 2 Hộp…,359278650.41,226,12,3030658.57,1589728.54

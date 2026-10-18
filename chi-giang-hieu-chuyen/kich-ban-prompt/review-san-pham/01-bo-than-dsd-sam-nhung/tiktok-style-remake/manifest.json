@@ -1,0 +1,59 @@
+{
+  "source_url": "https://www.tiktok.com/@buywitheric/video/7677563503783300382",
+  "source_download": "D:\\video-ai-aff\\chi-giang-review-san-pham\\_references\\tiktok-7677563503783300382.mp4",
+  "source_contact_sheet": "D:\\video-ai-aff\\chi-giang-review-san-pham\\_references\\tiktok-contact-sheet.jpg",
+  "analysis_file": "D:\\video-ai-aff\\chi-giang-review-san-pham\\01-bo-than-dsd-sam-nhung\\tiktok-style-remake\\tiktok-reference-analysis.md",
+  "storyboard_file": "D:\\video-ai-aff\\chi-giang-review-san-pham\\01-bo-than-dsd-sam-nhung\\tiktok-style-remake\\storyboard.md",
+  "flowkit_project_id": "e7f8b3dd-b6f0-4c61-922c-d4f8834909fe",
+  "flowkit_video_id": "1bdc2c59-0fe9-47f4-a7e0-4e507ac19a2b",
+  "model": "Google Omni Flash 1.1",
+  "model_key": "abra_r2v_10s",
+  "orientation": "VERTICAL",
+  "duration_s": 50.021,
+  "final_video": "D:\\video-ai-aff\\chi-giang-review-san-pham\\01-bo-than-dsd-sam-nhung\\01-sam-nhung-tiktok-style-video.mp4",
+  "audio_policy": "Replaced Omni-generated audio with the corresponding original shot audio after speech recognition detected an extra “vâng” in new shot 1; original dialogue and voice retained.",
+  "seed": null,
+  "scenes": {
+    "order": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "scene_id": [
+      "02637713-16ad-459e-8c3d-a5e41b6db8ef",
+      "4cb37406-0b3f-4415-bbfe-fb81dfa0b5e5",
+      "3cf288ea-7efc-48b1-8429-b496064104d5",
+      "cc285dd4-d98c-4e78-83fd-870457b38124",
+      "90a27909-c655-45ad-9784-ac3dd6b884f0"
+    ],
+    "operation_id": "50c372ad-dcc4-46f8-b174-70546034ce6b",
+    "media_id": "e2ffc1b6-3e44-4eea-9873-bd2ce873b4ee",
+    "model": "abra_r2v_10s",
+    "duration_s": 10,
+    "aspect_ratio": "VIDEO_ASPECT_RATIO_PORTRAIT",
+    "resolution": "720p",
+    "reference_media_ids": [
+      "26e58ac5-b9f6-4102-b65a-aef1e9365b23",
+      "4646edca-75ce-4d2c-ab6f-4e0c00078954"
+    ],
+    "prompt": [
+      "10-second vertical 9:16 photorealistic smartphone video. Use the Chị Giang reference for identity and the rooftop garden; use the Sâm Nhung DSD reference only for exact product design, ignoring its promotional background. Fast UGC rhythm with hard cuts between a medium close-up, a tight hand-and-product insert, and the medium close-up. 0–3s: start immediately with her looking into the lens and raising the bottle, label visible; she says exactly in Vietnamese: \"Đêm dậy tiểu ba bốn lần, sáng ra lưng mỏi nhừ? Anh nào bị, ở lại với Giang.\" 3–6s: tight insert of the same bottle and hand, no label redesign. 6–10s: return to her face, a knowing empathetic expression and small nod; she says exactly: \"Qua bốn lăm tuổi gặp nhiều lắm, mà mấy anh hay ngại nói.\" Natural Southern Vietnamese female voice if audio is generated; one speaker only. Natural real-time motion, steady handheld phone, no new people or location. No added speech, music, subtitles, captions, title cards, logos, or watermark. Preserve the original dialogue verbatim.",
+      "10-second vertical 9:16 photorealistic smartphone video, using the same Chị Giang identity, rooftop garden, and exact Sâm Nhung DSD product references. Fast UGC edit with 3 clear angles: 0–3s medium shot, she addresses the lens; 3–6s brief close insert of her free hand gesturing to lower back and knee while the product remains in frame; 6–10s return to medium close-up, she gives a sympathetic knowing look. She speaks exactly in Vietnamese: \"Ngủ không tròn giấc, sáng dậy đuối, đau lưng mỏi gối, vô chuyện vợ chồng cũng hết hứng. Vợ hỏi thì nói: anh mệt.\" One woman only, one speaker, natural Southern Vietnamese female voice if audio is generated. Keep the motion understated and real-time; do not introduce a second character, new setting, or additional line. No music, titles, subtitles, captions, logos, or watermark. Preserve the original dialogue verbatim.",
+      "10-second vertical 9:16 photorealistic smartphone video, same Chị Giang identity and rooftop garden, using the supplied Sâm Nhung DSD reference as the exact product design and ignoring the promotional background. Fast UGC product reveal: 0–3s medium shot as she presents bottle and box; 3–7s tight product insert as the bottle turns slightly toward the lens, keep the original package design and avoid inventing any label text; 7–10s return to her face with both products held clearly. She speaks exactly in Vietnamese: \"Hôm nay Giang review lọ Sâm Nhung Bổ Thận DSD. Trong có nhung hươu, nhân sâm, đông trùng, bột hàu, ba kích, nhục thung dung.\" One speaker only, natural Southern Vietnamese female voice if audio is generated. Real-time hand motion, daylight, no new characters or location. No extra dialogue, music, subtitles, captions, title cards, logos, or watermark. Preserve the original dialogue verbatim.",
+      "10-second vertical 9:16 photorealistic smartphone video, same Chị Giang identity, rooftop garden, and exact product reference. Quick practical demonstration in UGC style: 0–3s close-up of two capsules in her open palm; 3–6s medium insert as she indicates one to two with her fingers beside a glass of warm water; 6–10s return to her holding the bottle and finishing the line. She says exactly in Vietnamese: \"Uống một đến hai viên, sau ăn ba mươi phút, với nước ấm. Dùng đều, nhiều anh phản hồi bớt tiểu đêm, lưng gối đỡ mỏi.\" One speaker only, natural Southern Vietnamese female voice if audio is generated. Do not show taking or swallowing a capsule. Keep real-time motion; no extra people or setting. No added dialogue, music, subtitles, captions, titles, logos, or watermark. Preserve the original dialogue verbatim.",
+      "10-second vertical 9:16 photorealistic smartphone video, same Chị Giang identity and rooftop garden, exact referenced Sâm Nhung DSD bottle and box. Final UGC CTA with quick but clean cuts: 0–4s medium close-up, sincere and direct to camera with both products visible; 4–7s tighter product-and-face framing while she gives the safety reminder; 7–10s return to medium close-up, warm smile and a small downward hand gesture, product labels still visible. She says exactly in Vietnamese: \"Đây là thực phẩm bảo vệ sức khỏe, không phải thuốc. Tiểu buốt, tiểu ra máu thì đi khám nha. Anh nào cần, Giang để ở phần bình luận.\" One speaker only, natural Southern Vietnamese female voice if audio is generated. No new text, speech, music, subtitles, captions, titles, logos, or watermark. Preserve the original dialogue verbatim."
+    ],
+    "dialogue": [
+      "Đêm dậy tiểu ba bốn lần, sáng ra lưng mỏi nhừ? Anh nào bị, ở lại với Giang. Qua bốn lăm tuổi gặp nhiều lắm, mà mấy anh hay ngại nói.",
+      "Ngủ không tròn giấc, sáng dậy đuối, đau lưng mỏi gối, vô chuyện vợ chồng cũng hết hứng. Vợ hỏi thì nói: anh mệt.",
+      "Hôm nay Giang review lọ Sâm Nhung Bổ Thận DSD. Trong có nhung hươu, nhân sâm, đông trùng, bột hàu, ba kích, nhục thung dung.",
+      "Uống một đến hai viên, sau ăn ba mươi phút, với nước ấm. Dùng đều, nhiều anh phản hồi bớt tiểu đêm, lưng gối đỡ mỏi.",
+      "Đây là thực phẩm bảo vệ sức khỏe, không phải thuốc. Tiểu buốt, tiểu ra máu thì đi khám nha. Anh nào cần, Giang để ở phần bình luận."
+    ],
+    "generated_visual_path": "D:\\video-ai-aff\\chi-giang-review-san-pham\\01-bo-than-dsd-sam-nhung\\tiktok-style-remake\\shots\\shot-01.mp4",
+    "final_scene_path": "D:\\video-ai-aff\\chi-giang-review-san-pham\\01-bo-than-dsd-sam-nhung\\tiktok-style-remake\\shots\\shot-01-final.mp4",
+    "original_audio_path": "D:\\video-ai-aff\\chi-giang-review-san-pham\\01-bo-than-dsd-sam-nhung\\video-shots\\shot-01.mp4"
+  }
+}

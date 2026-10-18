@@ -1,0 +1,6 @@
+[
+  {"group": "1. Sinh lý & tiết niệu", "req_name": "Sâm Nhung Bổ Thận DSD", "keyword": "Viên bổ thận DSD sâm nhung", "must_contain": "DSD", "fallback_keyword": "DSDPHARMA sâm nhung bổ thận", "sub_channel": "ChiGiang"},
+  {"group": "1. Sinh lý & tiết niệu", "req_name": "Bọt vệ sinh nam Oniiz", "keyword": "Oniiz bọt vệ sinh nam", "must_contain": "Oniiz", "fallback_keyword": "Dung dịch vệ sinh nam Oniiz", "sub_channel": "ChiGiang"},
+  {"group": "1. Sinh lý & tiết niệu", "req_name": "Gel bôi trơn (kiểm tra hoa hồng Shopee)", "keyword": "Gel bôi trơn Durex", "must_contain": "bôi trơn", "fallback_keyword": "Gel bôi trơn gốc nước", "sub_channel": "ChiGiang"},
+  {"group": "1. Sinh lý & tiết niệu", "req_name": "Bao cao su (kiểm tra hoa hồng Shopee)", "keyword": "Bao cao su Durex", "must_contain": "Durex", "fallback_keyword": "Bao cao su siêu mỏng", "sub_channel": "ChiGiang"}
+]

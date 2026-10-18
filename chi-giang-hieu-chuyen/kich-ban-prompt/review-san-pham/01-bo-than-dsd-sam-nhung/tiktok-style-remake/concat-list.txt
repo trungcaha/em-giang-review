@@ -1,0 +1,5 @@
+file 'D:\video-ai-aff\chi-giang-review-san-pham\01-bo-than-dsd-sam-nhung\tiktok-style-remake\shots\shot-01.mp4'
+file 'D:\video-ai-aff\chi-giang-review-san-pham\01-bo-than-dsd-sam-nhung\tiktok-style-remake\shots\shot-02.mp4'
+file 'D:\video-ai-aff\chi-giang-review-san-pham\01-bo-than-dsd-sam-nhung\tiktok-style-remake\shots\shot-03.mp4'
+file 'D:\video-ai-aff\chi-giang-review-san-pham\01-bo-than-dsd-sam-nhung\tiktok-style-remake\shots\shot-04.mp4'
+file 'D:\video-ai-aff\chi-giang-review-san-pham\01-bo-than-dsd-sam-nhung\tiktok-style-remake\shots\shot-05.mp4'
